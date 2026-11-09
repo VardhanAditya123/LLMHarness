@@ -1,0 +1,24 @@
+raw_model:
+  model_name: "google/gemma-1b-it"
+  device: "cpu"
+  max_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  dtype: "float32"
+
+ollama_model:
+  model_name: "gemma3"
+  ollama_host: "http://localhost:11434"
+  max_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  # Note: change model_name to match what's installed in your Ollama
+  # Check available models with: ollama list
+
+gemma_base:
+  checkpoint: "google/gemma-1b"
+  torch_dtype: "float32"
+
+embedding:
+  model: "nomic-embed-text"
+  default_dimension: 768

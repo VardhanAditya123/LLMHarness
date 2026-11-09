@@ -1,0 +1,12 @@
+benchmark:
+  name: "TokenSmith Fine-Tuning Baseline"
+  dataset: "buzzdb"
+  test_split_size: 16
+  random_seed: 42
+  
+evaluation:
+  metrics:
+    - "answer_correctness"
+    - "grounding"
+    - "abstention"
+    - "latency"
