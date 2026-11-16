@@ -1,0 +1,1814 @@
+{
+  "base": {
+    "mode": "base",
+    "passed": 0,
+    "total": 34,
+    "cases": [
+      {
+        "case_id": "pinning_needed",
+        "suite": "grounding",
+        "question": "Why is page pinning needed in a buffer manager?",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch05.084",
+          "ch05.090"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch05.084",
+            "text": "## 5.4 The Page Lifecycle: Pinning and Modifications\n\nWhen the execution engine requests a page from the `BufferManager`, it isn't just asking for a temporary copy of the data. It's entering into a co"
+          },
+          {
+            "chunk_id": "ch05.090",
+            "text": "When a client like the `try_to_insert` method calls `buffer_manager.getPage(page_itr)`, it receives a C++ reference to a `std::unique_ptr<SlottedPage>`. This reference acts as an *implicit pin*. As lo"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "lru_sequential_scan",
+        "suite": "grounding",
+        "question": "What is sequential flooding and why does it make LRU fail?",
+        "passed": false,
+        "matched": 0,
+        "expected": 3,
+        "expected_ids": [
+          "ch06.012",
+          "ch05.119",
+          "ch06.064"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch06.012",
+            "text": "### 6.1.2 When LRU Fails: The Sequential Scan\n\nThe central assumption of LRU is **temporal locality**: if a page is accessed, it is likely to be accessed again in the near future. This holds true for "
+          },
+          {
+            "chunk_id": "ch05.119",
+            "text": "The result is startling: every single page access is a cache miss. The hit rate is 0%. This phenomenon is known as **sequential flooding**. The stream of new, sequentially accessed pages constantly pu"
+          },
+          {
+            "chunk_id": "ch06.064",
+            "text": "#### 6.4.2.1 Worked Example: Surviving a Scan\n\nLet's trace the same scenario that caused sequential flooding in LRU and see how 2Q handles it. Assume a buffer pool with a `cacheSize` of 5.\n\nOur worklo"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "bplus_vs_binary_tree",
+        "suite": "grounding",
+        "question": "Why is a B+ tree preferred over a binary search tree for disk-based database indexes?",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.019",
+          "ch09.023"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.019",
+            "text": "## 9.2 Anatomy of a B+ Tree\n\nIn the last section, we saw that while hash indexes provide exceptional speed for point queries\u2014finding a single record by its key\u2014they are poorly suited for retrieving a "
+          },
+          {
+            "chunk_id": "ch09.023",
+            "text": "### 9.2.1 A Search Tree Designed for Disk\n\nThe fundamental challenge of building a database index is the vast difference in speed between main memory (RAM) and persistent storage (like an SSD). Access"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "hash_range_queries",
+        "suite": "grounding",
+        "question": "Why does a hash index struggle with range queries?",
+        "passed": false,
+        "matched": 0,
+        "expected": 4,
+        "expected_ids": [
+          "ch09.002",
+          "ch08.057",
+          "ch09.013",
+          "ch09.015"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.002",
+            "text": "## 9.1 Why Hash Indexes Fall Short\n\nIn the world of databases, speed is paramount. When a user requests a specific piece of information\u2014a customer profile, a product detail, a single transaction\u2014they "
+          },
+          {
+            "chunk_id": "ch08.057",
+            "text": "This comparison is the central trade-off of the hash index. It sacrifices all notion of order to gain incredible speed on one type of query. If your application's query workload consists almost entire"
+          },
+          {
+            "chunk_id": "ch09.013",
+            "text": "This code block serves as our chapter's central motivating experiment. It defines a small integer range and then executes the exact same logical query on both the old `HashIndex` and the new `OrderedI"
+          },
+          {
+            "chunk_id": "ch09.015",
+            "text": "The table reveals a fascinating set of trade-offs. For point queries and insertions, the hash index remains the theoretical champion with its O(1) average-case performance. The ordered index's O(log N"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "bplus_sequence_set",
+        "suite": "grounding",
+        "question": "Why does the B+ tree sequence set make range scans efficient?",
+        "passed": false,
+        "matched": 0,
+        "expected": 4,
+        "expected_ids": [
+          "ch09.021",
+          "ch09.030",
+          "ch09.033",
+          "ch09.102"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.021",
+            "text": "#### `BPlusTree::rangeQuery` in `33-buzzdb.cpp:621-647`\n\nDemonstrates an efficient range query. The code first traverses the tree to find the starting leaf, then scans horizontally using the 'next' po"
+          },
+          {
+            "chunk_id": "ch09.030",
+            "text": "### 9.2.3 The Sequence Set: The Key to Fast Range Scans\n\nThe true genius of the B+ Tree's design, and the feature that makes it so dominant for database indexing, is not just its shallow height but th"
+          },
+          {
+            "chunk_id": "ch09.033",
+            "text": "This horizontal scan is incredibly fast. On a disk-based system, the database can often pre-fetch the next few leaf nodes, anticipating that the scan will continue. The I/O pattern becomes largely seq"
+          },
+          {
+            "chunk_id": "ch09.102",
+            "text": "This process continues until the end of the range is found. The entire scan happens at one level of the tree, traversing a simple linked list. In a B-Tree, which lacks a sequence set, a range scan is "
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "aggregation_grouping",
+        "suite": "grounding",
+        "question": "How does BuzzDB implement GROUP BY aggregation with a hash table?",
+        "passed": false,
+        "matched": 0,
+        "expected": 3,
+        "expected_ids": [
+          "ch13.022",
+          "ch13.028",
+          "ch13.052"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch13.022",
+            "text": "## 13.2 Implementing Aggregation with a Hash Table\n\nExecuting a SQL query with a `GROUP BY` clause presents a fundamental challenge for a database system. The operator responsible for this task receiv"
+          },
+          {
+            "chunk_id": "ch13.028",
+            "text": "The central component of the `HashAggregationOperator`'s internal state is its hash table. In BuzzDB, this is an `std::unordered_map`. The map's key represents the grouping key, and its value holds th"
+          },
+          {
+            "chunk_id": "ch13.052",
+            "text": "This `hash_table` is the core data structure. It will store the intermediate aggregate results. The key is a `std::vector<Field>`, representing the values of the `GROUP BY` columns for a given group ("
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "wal_write_ordering",
+        "suite": "grounding",
+        "question": "Why does write-ahead logging require write ordering control in the buffer manager?",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch05.016",
+          "ch06.096"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch05.016",
+            "text": "3. **Write Ordering Control:** This is perhaps the most critical reason for a custom buffer manager, and it is essential for guaranteeing database durability and recoverability (the 'D' in ACID). Tran"
+          },
+          {
+            "chunk_id": "ch06.096",
+            "text": "There is a second, equally critical reason that we will explore in detail in a later chapter: **crash recovery**. To guarantee durability\u2014the \"D\" in ACID\u2014a database must be able to control the precise"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "oltp_vs_olap",
+        "suite": "grounding",
+        "question": "What is the difference between OLTP and OLAP workloads?",
+        "passed": false,
+        "matched": 0,
+        "expected": 3,
+        "expected_ids": [
+          "ch15.002",
+          "ch15.008",
+          "ch15.012"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch15.002",
+            "text": "## 15.1 The Two Worlds of Data: OLTP vs. OLAP\n\nImagine you're building the software for a global e-commerce giant. At any given moment, thousands of users are interacting with your system. A customer "
+          },
+          {
+            "chunk_id": "ch15.008",
+            "text": "The goal of this experiment is not to measure transactions per second, but to compare the total time taken (`rowStorageTime` vs. `columnarStorageTime`) to answer this single, complex question. This is"
+          },
+          {
+            "chunk_id": "ch15.012",
+            "text": "This inherent conflict led to the widespread practice of maintaining two separate systems: an OLTP database for live operations and a separate **data warehouse** or **data lake** optimized for analyti"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "column_store_analytics",
+        "suite": "grounding",
+        "question": "Why is a column store faster for analytical queries that read only a few columns?",
+        "passed": false,
+        "matched": 0,
+        "expected": 3,
+        "expected_ids": [
+          "ch15.021",
+          "ch15.032",
+          "ch15.039"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch15.021",
+            "text": "## 15.2 A New Foundation: Column-Oriented Storage\n\nIn the world of analytical databases, where queries scan millions or billions of rows to compute aggregates, the single greatest performance bottlene"
+          },
+          {
+            "chunk_id": "ch15.032",
+            "text": "### 15.2.2 The I/O Advantage in Action\n\nHaving stored our data in two different ways, we can now see how this choice affects query performance. The BuzzDB experiment focuses on a classic analytical qu"
+          },
+          {
+            "chunk_id": "ch15.039",
+            "text": "The calculation predicts that the column store will perform `1954 / 7813 \u2248 0.25` times the I/O of the row store. This makes perfect sense: the query needs 2 out of 8 columns, so it should only need to"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "volcano_iterator_model_alias",
+        "suite": "grounding",
+        "question": "Why is the Volcano model inefficient for analytical queries?",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch15.074",
+          "ch15.080"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch15.074",
+            "text": "## 15.4 From I/O to CPU: Vectorized Execution and SIMD\n\nIn the last section, we saw the foundational benefit of a column-oriented layout: by storing all values for a single column together, an analyti"
+          },
+          {
+            "chunk_id": "ch15.080",
+            "text": "While elegant and easy to implement, this one-tuple-at-a-time approach is profoundly inefficient for analytical queries that process millions or billions of rows. For every single tuple, the system in"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "pinning_followup_why_needed",
+        "suite": "multiturn",
+        "question": "why is that needed?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch05.084"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch05.084",
+            "text": "## 5.4 The Page Lifecycle: Pinning and Modifications\n\nWhen the execution engine requests a page from the `BufferManager`, it isn't just asking for a temporary copy of the data. It's entering into a co"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "bplus_followup_why_better",
+        "suite": "multiturn",
+        "question": "why is it better?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch09.019"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.019",
+            "text": "## 9.2 Anatomy of a B+ Tree\n\nIn the last section, we saw that while hash indexes provide exceptional speed for point queries\u2014finding a single record by its key\u2014they are poorly suited for retrieving a "
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "lru_followup_elaborate",
+        "suite": "multiturn",
+        "question": "Elaborate on that.",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch06.044",
+          "ch06.045"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch06.044",
+            "text": "Let's break down a few key steps:\n\n- **Access 1:** A hit on page 1. It was previously the third-most-recently used page. The policy finds it in the map, removes it from its old position in the list, a"
+          },
+          {
+            "chunk_id": "ch06.045",
+            "text": "This trace shows the dynamism of the LRU policy. It constantly reorders pages based on access, ensuring that \"hot\" pages like 1 and 2 stay in the buffer, while \"cold\" pages like 3 are quickly identifi"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "sequence_set_hashing_contrast",
+        "suite": "multiturn",
+        "question": "Does that mean we should always prefer it over hashing?",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.030",
+          "ch08.059"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.030",
+            "text": "### 9.2.3 The Sequence Set: The Key to Fast Range Scans\n\nThe true genius of the B+ Tree's design, and the feature that makes it so dominant for database indexing, is not just its shallow height but th"
+          },
+          {
+            "chunk_id": "ch08.059",
+            "text": "This table makes the choice clear. The hash index is a specialized tool, a drag racer optimized for a single, straight track: equality lookups. The B+ Tree is the all-terrain vehicle. It is very good "
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "twoq_lru_answer_derived_chain",
+        "suite": "multiturn",
+        "question": "Case twoq_lru_answer_derived_chain",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "slotted_page_slot_entry_definition",
+        "suite": "multiturn",
+        "question": "In that design, what exactly does each slto store?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch04.019"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch04.019",
+            "text": "#### `SlottedPage` in `14-buzzdb.cpp:166-186`\n\nThe definitions for the `Slot` struct and the `SlottedPage` class, including its constructor which initializes the slot directory.\n\n```cpp\n166\tstruct Slo"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "column_store_tradeoff_chain",
+        "suite": "multiturn",
+        "question": "Case column_store_tradeoff_chain",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "vectorized_execution_chain",
+        "suite": "multiturn",
+        "question": "Case vectorized_execution_chain",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "confirmation_yes_continues_previous_topic",
+        "suite": "multiturn",
+        "question": "Yes",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch01.097"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch01.097",
+            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "fresh_definition_beats_stale_context",
+        "suite": "multiturn",
+        "question": "What is an atomic operation?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch01.097"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch01.097",
+            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
+          }
+        ],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "buffer_safety",
+        "suite": "reasoning",
+        "question": "Case buffer_safety",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "twoq_trace",
+        "suite": "reasoning",
+        "question": "Case twoq_trace",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "aggregate_bug",
+        "suite": "reasoning",
+        "question": "Case aggregate_bug",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "column_pages",
+        "suite": "reasoning",
+        "question": "Case column_pages",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "aggregation_tradeoffs",
+        "suite": "reasoning",
+        "question": "Case aggregation_tradeoffs",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "batch_speedup",
+        "suite": "reasoning",
+        "question": "Case batch_speedup",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "slot_relocation",
+        "suite": "reasoning_variants",
+        "question": "Case slot_relocation",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "split_kind_change",
+        "suite": "reasoning_variants",
+        "question": "Case split_kind_change",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "simd_mask_change",
+        "suite": "reasoning_variants",
+        "question": "Case simd_mask_change",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "distractor_hash_ranges",
+        "suite": "regression",
+        "question": "Why does a hash index struggle with range queries?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "distractor_group_totals",
+        "suite": "regression",
+        "question": "While reading sales rows one at a time, how can the engine maintain a separate running total for every region without sorting first?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "pinning_vs_durability",
+        "suite": "regression",
+        "question": "Does pinning a dirty page make its changes durable? Explain what pinning and write-ahead logging each guarantee before that page can be written to disk or its frame reused.",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "code_hash_missing_sentinel",
+        "suite": "regression",
+        "question": "In the book's v024 HashIndex backed by std::unordered_map, what does getValue return for an absent key? If a present key stores -1, can a caller distinguish these two cases using the returned integer alone? Use this implementation rather than a redesigned API.",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "table_sales_product_region",
+        "suite": "regression",
+        "question": "In the small Sales example introducing GROUP BY region, restrict the input to product_id 101. What are its North and South subtotals, and which region has the larger subtotal? Show the contributing rows; do not use each region's total across all products.",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      }
+    ],
+    "pass_rate": "0.0%"
+  },
+  "rag": {
+    "mode": "rag",
+    "passed": 24,
+    "total": 34,
+    "cases": [
+      {
+        "case_id": "pinning_needed",
+        "question": "Why is page pinning needed in a buffer manager?",
+        "passed": true,
+        "matched": 1,
+        "expected": 1,
+        "expected_ids": [
+          "ch05.084",
+          "ch05.090"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch05.084",
+            "text": "## 5.4 The Page Lifecycle: Pinning and Modifications\n\nWhen the execution engine requests a page from the `BufferManager`, it isn't just asking for a temporary copy of the data. It's entering into a co"
+          },
+          {
+            "chunk_id": "ch05.090",
+            "text": "When a client like the `try_to_insert` method calls `buffer_manager.getPage(page_itr)`, it receives a C++ reference to a `std::unique_ptr<SlottedPage>`. This reference acts as an *implicit pin*. As lo"
+          }
+        ],
+        "retrieved_ids": [
+          "ch05.084",
+          "ch05.088",
+          "ch05.089",
+          "ch06.095",
+          "ch06.046",
+          "ch06.002",
+          "ch06.055",
+          "ch06.068"
+        ]
+      },
+      {
+        "case_id": "lru_sequential_scan",
+        "question": "What is sequential flooding and why does it make LRU fail?",
+        "passed": true,
+        "matched": 3,
+        "expected": 1,
+        "expected_ids": [
+          "ch06.012",
+          "ch05.119",
+          "ch06.064"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch06.012",
+            "text": "### 6.1.2 When LRU Fails: The Sequential Scan\n\nThe central assumption of LRU is **temporal locality**: if a page is accessed, it is likely to be accessed again in the near future. This holds true for "
+          },
+          {
+            "chunk_id": "ch05.119",
+            "text": "The result is startling: every single page access is a cache miss. The hit rate is 0%. This phenomenon is known as **sequential flooding**. The stream of new, sequentially accessed pages constantly pu"
+          },
+          {
+            "chunk_id": "ch06.064",
+            "text": "#### 6.4.2.1 Worked Example: Surviving a Scan\n\nLet's trace the same scenario that caused sequential flooding in LRU and see how 2Q handles it. Assume a buffer pool with a `cacheSize` of 5.\n\nOur worklo"
+          }
+        ],
+        "retrieved_ids": [
+          "ch03.095",
+          "ch05.122",
+          "ch07.080",
+          "ch06.064",
+          "ch06.083",
+          "ch06.012",
+          "ch05.119",
+          "ch06.091"
+        ]
+      },
+      {
+        "case_id": "bplus_vs_binary_tree",
+        "question": "Why is a B+ tree preferred over a binary search tree for disk-based database indexes?",
+        "passed": true,
+        "matched": 2,
+        "expected": 1,
+        "expected_ids": [
+          "ch09.019",
+          "ch09.023"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.019",
+            "text": "## 9.2 Anatomy of a B+ Tree\n\nIn the last section, we saw that while hash indexes provide exceptional speed for point queries\u2014finding a single record by its key\u2014they are poorly suited for retrieving a "
+          },
+          {
+            "chunk_id": "ch09.023",
+            "text": "### 9.2.1 A Search Tree Designed for Disk\n\nThe fundamental challenge of building a database index is the vast difference in speed between main memory (RAM) and persistent storage (like an SSD). Access"
+          }
+        ],
+        "retrieved_ids": [
+          "ch04.071",
+          "ch08.058",
+          "ch09.023",
+          "ch09.019",
+          "ch08.059",
+          "ch07.024",
+          "ch09.099",
+          "ch10.020"
+        ]
+      },
+      {
+        "case_id": "hash_range_queries",
+        "question": "Why does a hash index struggle with range queries?",
+        "passed": true,
+        "matched": 4,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.002",
+          "ch08.057",
+          "ch09.013",
+          "ch09.015"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.002",
+            "text": "## 9.1 Why Hash Indexes Fall Short\n\nIn the world of databases, speed is paramount. When a user requests a specific piece of information\u2014a customer profile, a product detail, a single transaction\u2014they "
+          },
+          {
+            "chunk_id": "ch08.057",
+            "text": "This comparison is the central trade-off of the hash index. It sacrifices all notion of order to gain incredible speed on one type of query. If your application's query workload consists almost entire"
+          },
+          {
+            "chunk_id": "ch09.013",
+            "text": "This code block serves as our chapter's central motivating experiment. It defines a small integer range and then executes the exact same logical query on both the old `HashIndex` and the new `OrderedI"
+          },
+          {
+            "chunk_id": "ch09.015",
+            "text": "The table reveals a fascinating set of trade-offs. For point queries and insertions, the hash index remains the theoretical champion with its O(1) average-case performance. The ordered index's O(log N"
+          }
+        ],
+        "retrieved_ids": [
+          "ch09.001",
+          "ch08.059",
+          "ch08.090",
+          "ch15.001",
+          "ch09.013",
+          "ch09.002",
+          "ch09.015",
+          "ch08.057"
+        ]
+      },
+      {
+        "case_id": "bplus_sequence_set",
+        "question": "Why does the B+ tree sequence set make range scans efficient?",
+        "passed": false,
+        "matched": 1,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.021",
+          "ch09.030",
+          "ch09.033",
+          "ch09.102"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.021",
+            "text": "#### `BPlusTree::rangeQuery` in `33-buzzdb.cpp:621-647`\n\nDemonstrates an efficient range query. The code first traverses the tree to find the starting leaf, then scans horizontally using the 'next' po"
+          },
+          {
+            "chunk_id": "ch09.030",
+            "text": "### 9.2.3 The Sequence Set: The Key to Fast Range Scans\n\nThe true genius of the B+ Tree's design, and the feature that makes it so dominant for database indexing, is not just its shallow height but th"
+          },
+          {
+            "chunk_id": "ch09.033",
+            "text": "This horizontal scan is incredibly fast. On a disk-based system, the database can often pre-fetch the next few leaf nodes, anticipating that the scan will continue. The I/O pattern becomes largely seq"
+          },
+          {
+            "chunk_id": "ch09.102",
+            "text": "This process continues until the end of the range is found. The entire scan happens at one level of the tree, traversing a simple linked list. In a B-Tree, which lacks a sequence set, a range scan is "
+          }
+        ],
+        "retrieved_ids": [
+          "ch09.030",
+          "ch08.059",
+          "ch09.047",
+          "ch06.086",
+          "ch07.061",
+          "ch10.020",
+          "ch08.058",
+          "ch07.051"
+        ]
+      },
+      {
+        "case_id": "aggregation_grouping",
+        "question": "How does BuzzDB implement GROUP BY aggregation with a hash table?",
+        "passed": false,
+        "matched": 1,
+        "expected": 2,
+        "expected_ids": [
+          "ch13.022",
+          "ch13.028",
+          "ch13.052"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch13.022",
+            "text": "## 13.2 Implementing Aggregation with a Hash Table\n\nExecuting a SQL query with a `GROUP BY` clause presents a fundamental challenge for a database system. The operator responsible for this task receiv"
+          },
+          {
+            "chunk_id": "ch13.028",
+            "text": "The central component of the `HashAggregationOperator`'s internal state is its hash table. In BuzzDB, this is an `std::unordered_map`. The map's key represents the grouping key, and its value holds th"
+          },
+          {
+            "chunk_id": "ch13.052",
+            "text": "This `hash_table` is the core data structure. It will store the intermediate aggregate results. The key is a `std::vector<Field>`, representing the values of the `GROUP BY` columns for a given group ("
+          }
+        ],
+        "retrieved_ids": [
+          "ch13.060",
+          "ch13.036",
+          "ch13.085",
+          "ch13.001",
+          "ch13.093",
+          "ch14.010",
+          "ch13.079",
+          "ch13.022"
+        ]
+      },
+      {
+        "case_id": "wal_write_ordering",
+        "question": "Why does write-ahead logging require write ordering control in the buffer manager?",
+        "passed": true,
+        "matched": 2,
+        "expected": 1,
+        "expected_ids": [
+          "ch05.016",
+          "ch06.096"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch05.016",
+            "text": "3. **Write Ordering Control:** This is perhaps the most critical reason for a custom buffer manager, and it is essential for guaranteeing database durability and recoverability (the 'D' in ACID). Tran"
+          },
+          {
+            "chunk_id": "ch06.096",
+            "text": "There is a second, equally critical reason that we will explore in detail in a later chapter: **crash recovery**. To guarantee durability\u2014the \"D\" in ACID\u2014a database must be able to control the precise"
+          }
+        ],
+        "retrieved_ids": [
+          "ch05.016",
+          "ch06.096",
+          "ch06.095",
+          "ch03.103",
+          "ch05.013",
+          "ch07.074",
+          "ch05.068",
+          "ch06.068"
+        ]
+      },
+      {
+        "case_id": "oltp_vs_olap",
+        "question": "What is the difference between OLTP and OLAP workloads?",
+        "passed": false,
+        "matched": 1,
+        "expected": 2,
+        "expected_ids": [
+          "ch15.002",
+          "ch15.008",
+          "ch15.012"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch15.002",
+            "text": "## 15.1 The Two Worlds of Data: OLTP vs. OLAP\n\nImagine you're building the software for a global e-commerce giant. At any given moment, thousands of users are interacting with your system. A customer "
+          },
+          {
+            "chunk_id": "ch15.008",
+            "text": "The goal of this experiment is not to measure transactions per second, but to compare the total time taken (`rowStorageTime` vs. `columnarStorageTime`) to answer this single, complex question. This is"
+          },
+          {
+            "chunk_id": "ch15.012",
+            "text": "This inherent conflict led to the widespread practice of maintaining two separate systems: an OLTP database for live operations and a separate **data warehouse** or **data lake** optimized for analyti"
+          }
+        ],
+        "retrieved_ids": [
+          "ch15.009",
+          "ch10.126",
+          "ch15.012",
+          "ch15.006",
+          "ch01.085",
+          "ch02.054",
+          "ch15.018",
+          "ch15.010"
+        ]
+      },
+      {
+        "case_id": "column_store_analytics",
+        "question": "Why is a column store faster for analytical queries that read only a few columns?",
+        "passed": true,
+        "matched": 1,
+        "expected": 1,
+        "expected_ids": [
+          "ch15.021",
+          "ch15.032",
+          "ch15.039"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch15.021",
+            "text": "## 15.2 A New Foundation: Column-Oriented Storage\n\nIn the world of analytical databases, where queries scan millions or billions of rows to compute aggregates, the single greatest performance bottlene"
+          },
+          {
+            "chunk_id": "ch15.032",
+            "text": "### 15.2.2 The I/O Advantage in Action\n\nHaving stored our data in two different ways, we can now see how this choice affects query performance. The BuzzDB experiment focuses on a classic analytical qu"
+          },
+          {
+            "chunk_id": "ch15.039",
+            "text": "The calculation predicts that the column store will perform `1954 / 7813 \u2248 0.25` times the I/O of the row store. This makes perfect sense: the query needs 2 out of 8 columns, so it should only need to"
+          }
+        ],
+        "retrieved_ids": [
+          "ch15.052",
+          "ch15.049",
+          "ch15.046",
+          "ch15.008",
+          "ch15.020",
+          "ch15.021",
+          "ch14.097",
+          "ch15.001"
+        ]
+      },
+      {
+        "case_id": "volcano_iterator_model_alias",
+        "question": "Why is the Volcano model inefficient for analytical queries?",
+        "passed": false,
+        "matched": 1,
+        "expected": 2,
+        "expected_ids": [
+          "ch15.074",
+          "ch15.080"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch15.074",
+            "text": "## 15.4 From I/O to CPU: Vectorized Execution and SIMD\n\nIn the last section, we saw the foundational benefit of a column-oriented layout: by storing all values for a single column together, an analyti"
+          },
+          {
+            "chunk_id": "ch15.080",
+            "text": "While elegant and easy to implement, this one-tuple-at-a-time approach is profoundly inefficient for analytical queries that process millions or billions of rows. For every single tuple, the system in"
+          }
+        ],
+        "retrieved_ids": [
+          "ch14.095",
+          "ch15.080",
+          "ch14.097",
+          "ch10.125",
+          "ch07.079",
+          "ch08.088",
+          "ch15.046",
+          "ch15.008"
+        ]
+      },
+      {
+        "case_id": "pinning_followup_why_needed",
+        "question": "why is that needed?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch05.084"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch05.084",
+            "text": "## 5.4 The Page Lifecycle: Pinning and Modifications\n\nWhen the execution engine requests a page from the `BufferManager`, it isn't just asking for a temporary copy of the data. It's entering into a co"
+          }
+        ],
+        "retrieved_ids": [
+          "ch08.013",
+          "ch08.090",
+          "ch02.049",
+          "ch11.039",
+          "ch07.032",
+          "ch08.088",
+          "ch09.016",
+          "ch07.080"
+        ]
+      },
+      {
+        "case_id": "bplus_followup_why_better",
+        "question": "why is it better?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch09.019"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.019",
+            "text": "## 9.2 Anatomy of a B+ Tree\n\nIn the last section, we saw that while hash indexes provide exceptional speed for point queries\u2014finding a single record by its key\u2014they are poorly suited for retrieving a "
+          }
+        ],
+        "retrieved_ids": [
+          "ch11.039",
+          "ch08.059",
+          "ch10.019",
+          "ch01.085",
+          "ch02.049",
+          "ch07.080",
+          "ch08.088",
+          "ch04.092"
+        ]
+      },
+      {
+        "case_id": "lru_followup_elaborate",
+        "question": "Elaborate on that.",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch06.044",
+          "ch06.045"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch06.044",
+            "text": "Let's break down a few key steps:\n\n- **Access 1:** A hit on page 1. It was previously the third-most-recently used page. The policy finds it in the map, removes it from its old position in the list, a"
+          },
+          {
+            "chunk_id": "ch06.045",
+            "text": "This trace shows the dynamism of the LRU policy. It constantly reorders pages based on access, ensuring that \"hot\" pages like 1 and 2 stay in the buffer, while \"cold\" pages like 3 are quickly identifi"
+          }
+        ],
+        "retrieved_ids": [
+          "ch14.077",
+          "ch08.094",
+          "ch11.021",
+          "ch11.030",
+          "ch15.016",
+          "ch08.107",
+          "ch02.031",
+          "ch12.119"
+        ]
+      },
+      {
+        "case_id": "sequence_set_hashing_contrast",
+        "question": "Does that mean we should always prefer it over hashing?",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.030",
+          "ch08.059"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch09.030",
+            "text": "### 9.2.3 The Sequence Set: The Key to Fast Range Scans\n\nThe true genius of the B+ Tree's design, and the feature that makes it so dominant for database indexing, is not just its shallow height but th"
+          },
+          {
+            "chunk_id": "ch08.059",
+            "text": "This table makes the choice clear. The hash index is a specialized tool, a drag racer optimized for a single, straight track: equality lookups. The B+ Tree is the all-terrain vehicle. It is very good "
+          }
+        ],
+        "retrieved_ids": [
+          "ch08.090",
+          "ch08.012",
+          "ch10.020",
+          "ch09.088",
+          "ch04.014",
+          "ch05.061",
+          "ch14.018",
+          "ch11.087"
+        ]
+      },
+      {
+        "case_id": "twoq_lru_answer_derived_chain",
+        "question": "Case twoq_lru_answer_derived_chain",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "slotted_page_slot_entry_definition",
+        "question": "In that design, what exactly does each slto store?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch04.019"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch04.019",
+            "text": "#### `SlottedPage` in `14-buzzdb.cpp:166-186`\n\nThe definitions for the `Slot` struct and the `SlottedPage` class, including its constructor which initializes the slot directory.\n\n```cpp\n166\tstruct Slo"
+          }
+        ],
+        "retrieved_ids": [
+          "ch09.016",
+          "ch07.018",
+          "ch14.093",
+          "ch05.022",
+          "ch06.068",
+          "ch14.076",
+          "ch11.040",
+          "ch07.007"
+        ]
+      },
+      {
+        "case_id": "column_store_tradeoff_chain",
+        "question": "Case column_store_tradeoff_chain",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "vectorized_execution_chain",
+        "question": "Case vectorized_execution_chain",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "confirmation_yes_continues_previous_topic",
+        "question": "Yes",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch01.097"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch01.097",
+            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
+          }
+        ],
+        "retrieved_ids": [
+          "ch01.001",
+          "ch01.002",
+          "ch01.003",
+          "ch01.004",
+          "ch01.005",
+          "ch01.006",
+          "ch01.007",
+          "ch01.008"
+        ]
+      },
+      {
+        "case_id": "fresh_definition_beats_stale_context",
+        "question": "What is an atomic operation?",
+        "passed": true,
+        "matched": 1,
+        "expected": 1,
+        "expected_ids": [
+          "ch01.097"
+        ],
+        "expected_content": [
+          {
+            "chunk_id": "ch01.097",
+            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
+          }
+        ],
+        "retrieved_ids": [
+          "ch06.018",
+          "ch01.097",
+          "ch12.080",
+          "ch01.018",
+          "ch02.025",
+          "ch08.090",
+          "ch01.011",
+          "ch08.066"
+        ]
+      },
+      {
+        "case_id": "buffer_safety",
+        "question": "Case buffer_safety",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "twoq_trace",
+        "question": "Case twoq_trace",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "aggregate_bug",
+        "question": "Case aggregate_bug",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "column_pages",
+        "question": "Case column_pages",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "aggregation_tradeoffs",
+        "question": "Case aggregation_tradeoffs",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "batch_speedup",
+        "question": "Case batch_speedup",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "slot_relocation",
+        "question": "Case slot_relocation",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "split_kind_change",
+        "question": "Case split_kind_change",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "simd_mask_change",
+        "question": "Case simd_mask_change",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch12.028",
+          "ch12.071",
+          "ch12.014",
+          "ch12.003",
+          "ch12.026",
+          "ch13.083",
+          "ch13.025",
+          "ch13.040"
+        ]
+      },
+      {
+        "case_id": "distractor_hash_ranges",
+        "question": "Why does a hash index struggle with range queries?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch09.001",
+          "ch08.059",
+          "ch08.090",
+          "ch15.001",
+          "ch09.013",
+          "ch09.002",
+          "ch09.015",
+          "ch08.057"
+        ]
+      },
+      {
+        "case_id": "distractor_group_totals",
+        "question": "While reading sales rows one at a time, how can the engine maintain a separate running total for every region without sorting first?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch07.032",
+          "ch13.022",
+          "ch13.008",
+          "ch13.069",
+          "ch15.021",
+          "ch01.064",
+          "ch01.042",
+          "ch13.006"
+        ]
+      },
+      {
+        "case_id": "pinning_vs_durability",
+        "question": "Does pinning a dirty page make its changes durable? Explain what pinning and write-ahead logging each guarantee before that page can be written to disk or its frame reused.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch05.097",
+          "ch05.088",
+          "ch05.016",
+          "ch05.084",
+          "ch06.096",
+          "ch05.093",
+          "ch05.102",
+          "ch05.101"
+        ]
+      },
+      {
+        "case_id": "code_hash_missing_sentinel",
+        "question": "In the book's v024 HashIndex backed by std::unordered_map, what does getValue return for an absent key? If a present key stores -1, can a caller distinguish these two cases using the returned integer alone? Use this implementation rather than a redesigned API.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch08.068",
+          "ch07.052",
+          "ch08.009",
+          "ch01.068",
+          "ch07.029",
+          "ch01.032",
+          "ch08.003",
+          "ch08.016"
+        ]
+      },
+      {
+        "case_id": "table_sales_product_region",
+        "question": "In the small Sales example introducing GROUP BY region, restrict the input to product_id 101. What are its North and South subtotals, and which region has the larger subtotal? Show the contributing rows; do not use each region's total across all products.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch13.006",
+          "ch13.009",
+          "ch12.002",
+          "ch13.080",
+          "ch08.026",
+          "ch13.011",
+          "ch07.044",
+          "ch13.029"
+        ]
+      }
+    ],
+    "pass_rate": "70.6%"
+  },
+  "tokensmith": {
+    "mode": "tokensmith",
+    "passed": 17,
+    "total": 21,
+    "pass_rate": "81.0%",
+    "cases": [
+      {
+        "case_id": "pinning_needed",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch05.084",
+          "ch05.090",
+          "ch06.037",
+          "ch05.102",
+          "ch05.116",
+          "ch05.101",
+          "ch05.088",
+          "ch05.091"
+        ]
+      },
+      {
+        "case_id": "lru_sequential_scan",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch06.012",
+          "ch05.119",
+          "ch06.064",
+          "ch06.055",
+          "ch06.057",
+          "ch06.019",
+          "ch05.122",
+          "ch13.093"
+        ]
+      },
+      {
+        "case_id": "bplus_vs_binary_tree",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch09.019",
+          "ch08.058",
+          "ch09.023",
+          "ch07.024",
+          "ch07.040",
+          "ch10.087",
+          "ch07.051",
+          "ch10.051"
+        ]
+      },
+      {
+        "case_id": "hash_range_queries",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch09.001",
+          "ch09.013",
+          "ch09.015",
+          "ch08.057",
+          "ch09.002",
+          "ch08.058",
+          "ch10.007",
+          "ch08.059"
+        ]
+      },
+      {
+        "case_id": "bplus_sequence_set",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch09.101",
+          "ch09.102",
+          "ch09.030",
+          "ch09.033",
+          "ch09.031",
+          "ch09.021",
+          "ch08.059",
+          "ch10.007"
+        ]
+      },
+      {
+        "case_id": "aggregation_grouping",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch13.060",
+          "ch13.022",
+          "ch13.080",
+          "ch13.081",
+          "ch13.079",
+          "ch14.054",
+          "ch14.084",
+          "ch13.052"
+        ]
+      },
+      {
+        "case_id": "wal_write_ordering",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch05.016",
+          "ch06.096",
+          "ch01.105",
+          "ch05.013",
+          "ch09.013",
+          "ch08.015",
+          "ch06.095",
+          "ch03.048"
+        ]
+      },
+      {
+        "case_id": "oltp_vs_olap",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch15.002",
+          "ch15.008",
+          "ch15.012",
+          "ch10.126",
+          "ch15.009",
+          "ch15.011",
+          "ch15.020",
+          "ch15.006"
+        ]
+      },
+      {
+        "case_id": "column_store_analytics",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch15.052",
+          "ch15.074",
+          "ch15.049",
+          "ch15.021",
+          "ch15.039",
+          "ch15.001",
+          "ch15.020",
+          "ch15.032"
+        ]
+      },
+      {
+        "case_id": "volcano_iterator_model_alias",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch15.074",
+          "ch12.104",
+          "ch15.021",
+          "ch14.082",
+          "ch15.080",
+          "ch14.095",
+          "ch11.001",
+          "ch13.059"
+        ]
+      },
+      {
+        "case_id": "buffer_safety",
+        "passed": false,
+        "failures": [
+          "missing evidence group writeback: need one of ['ch05.097']",
+          "missing evidence group writeback context 'flushed before its frame can be reused'"
+        ],
+        "hits": [
+          "ch05.102",
+          "ch05.101",
+          "ch05.103",
+          "ch05.084",
+          "ch05.093",
+          "ch05.016",
+          "ch05.088",
+          "ch11.077"
+        ]
+      },
+      {
+        "case_id": "twoq_trace",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch06.056",
+          "ch06.071",
+          "ch06.060",
+          "ch06.061",
+          "ch06.062",
+          "ch06.065",
+          "ch06.067",
+          "ch06.072"
+        ]
+      },
+      {
+        "case_id": "aggregate_bug",
+        "passed": false,
+        "failures": [
+          "missing evidence group initialization: need one of ['ch13.045', 'ch13.052', 'ch13.082']"
+        ],
+        "hits": [
+          "ch08.012",
+          "ch13.043",
+          "ch09.045",
+          "ch13.042",
+          "ch13.025",
+          "ch13.096",
+          "ch13.039",
+          "ch13.060"
+        ]
+      },
+      {
+        "case_id": "column_pages",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch15.024",
+          "ch15.042",
+          "ch15.093",
+          "ch15.051",
+          "ch07.065",
+          "ch07.062",
+          "ch07.061",
+          "ch03.087"
+        ]
+      },
+      {
+        "case_id": "aggregation_tradeoffs",
+        "passed": false,
+        "failures": [
+          "missing evidence group memory: need one of ['ch13.090', 'ch13.093']",
+          "missing evidence group memory context 'number of distinct groups'",
+          "missing evidence group ordering: need one of ['ch13.092', 'ch13.093']",
+          "missing evidence group ordering context 'unordered'",
+          "missing evidence group spilling_not_implemented: need one of ['ch13.093']",
+          "missing evidence group spilling_not_implemented context \"Simple in-memory versions (like BuzzDB's) fail\""
+        ],
+        "hits": [
+          "ch09.106",
+          "ch13.022",
+          "ch07.031",
+          "ch15.018",
+          "ch09.099",
+          "ch13.048",
+          "ch13.020",
+          "ch13.088"
+        ]
+      },
+      {
+        "case_id": "batch_speedup",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch15.091",
+          "ch15.081",
+          "ch15.094",
+          "ch15.090",
+          "ch02.065",
+          "ch12.117",
+          "ch12.118",
+          "ch15.038"
+        ]
+      },
+      {
+        "case_id": "distractor_hash_ranges",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch09.001",
+          "ch09.013",
+          "ch09.015",
+          "ch08.057",
+          "ch09.002",
+          "ch08.058",
+          "ch10.007",
+          "ch08.059"
+        ]
+      },
+      {
+        "case_id": "distractor_group_totals",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch07.032",
+          "ch13.088",
+          "ch13.008",
+          "ch13.006",
+          "ch13.009",
+          "ch13.087",
+          "ch01.077",
+          "ch11.015"
+        ]
+      },
+      {
+        "case_id": "pinning_vs_durability",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch05.016",
+          "ch05.097",
+          "ch05.102",
+          "ch06.096",
+          "ch05.088",
+          "ch05.101",
+          "ch05.093",
+          "ch05.103"
+        ]
+      },
+      {
+        "case_id": "code_hash_missing_sentinel",
+        "passed": false,
+        "failures": [
+          "missing evidence group lookup-result: need one of ['ch07.017', 'ch07.035', 'ch07.055', 'ch08.003', 'ch08.009', 'ch08.016']",
+          "missing evidence group lookup-result context 'return it != hash_index.end() ? it->second : -1;'"
+        ],
+        "hits": [
+          "ch01.068",
+          "ch02.004",
+          "ch02.022",
+          "ch03.060",
+          "ch03.068",
+          "ch10.033",
+          "ch07.031",
+          "ch12.107"
+        ]
+      },
+      {
+        "case_id": "table_sales_product_region",
+        "passed": true,
+        "failures": [],
+        "hits": [
+          "ch13.011",
+          "ch13.016",
+          "ch13.013",
+          "ch13.012",
+          "ch13.008",
+          "ch13.015",
+          "ch13.017",
+          "ch13.006"
+        ]
+      }
+    ]
+  }
+}
