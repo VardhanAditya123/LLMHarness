@@ -2,7 +2,7 @@
   "base": {
     "mode": "base",
     "passed": 0,
-    "total": 34,
+    "total": 27,
     "cases": [
       {
         "case_id": "pinning_needed",
@@ -275,175 +275,6 @@
         "reason": "No retrieval in base mode"
       },
       {
-        "case_id": "pinning_followup_why_needed",
-        "suite": "multiturn",
-        "question": "why is that needed?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch05.084"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch05.084",
-            "text": "## 5.4 The Page Lifecycle: Pinning and Modifications\n\nWhen the execution engine requests a page from the `BufferManager`, it isn't just asking for a temporary copy of the data. It's entering into a co"
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "bplus_followup_why_better",
-        "suite": "multiturn",
-        "question": "why is it better?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch09.019"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch09.019",
-            "text": "## 9.2 Anatomy of a B+ Tree\n\nIn the last section, we saw that while hash indexes provide exceptional speed for point queries\u2014finding a single record by its key\u2014they are poorly suited for retrieving a "
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "lru_followup_elaborate",
-        "suite": "multiturn",
-        "question": "Elaborate on that.",
-        "passed": false,
-        "matched": 0,
-        "expected": 2,
-        "expected_ids": [
-          "ch06.044",
-          "ch06.045"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch06.044",
-            "text": "Let's break down a few key steps:\n\n- **Access 1:** A hit on page 1. It was previously the third-most-recently used page. The policy finds it in the map, removes it from its old position in the list, a"
-          },
-          {
-            "chunk_id": "ch06.045",
-            "text": "This trace shows the dynamism of the LRU policy. It constantly reorders pages based on access, ensuring that \"hot\" pages like 1 and 2 stay in the buffer, while \"cold\" pages like 3 are quickly identifi"
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "sequence_set_hashing_contrast",
-        "suite": "multiturn",
-        "question": "Does that mean we should always prefer it over hashing?",
-        "passed": false,
-        "matched": 0,
-        "expected": 2,
-        "expected_ids": [
-          "ch09.030",
-          "ch08.059"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch09.030",
-            "text": "### 9.2.3 The Sequence Set: The Key to Fast Range Scans\n\nThe true genius of the B+ Tree's design, and the feature that makes it so dominant for database indexing, is not just its shallow height but th"
-          },
-          {
-            "chunk_id": "ch08.059",
-            "text": "This table makes the choice clear. The hash index is a specialized tool, a drag racer optimized for a single, straight track: equality lookups. The B+ Tree is the all-terrain vehicle. It is very good "
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "twoq_lru_answer_derived_chain",
-        "suite": "multiturn",
-        "question": "Case twoq_lru_answer_derived_chain",
-        "passed": false,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "slotted_page_slot_entry_definition",
-        "suite": "multiturn",
-        "question": "In that design, what exactly does each slto store?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch04.019"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch04.019",
-            "text": "#### `SlottedPage` in `14-buzzdb.cpp:166-186`\n\nThe definitions for the `Slot` struct and the `SlottedPage` class, including its constructor which initializes the slot directory.\n\n```cpp\n166\tstruct Slo"
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "column_store_tradeoff_chain",
-        "suite": "multiturn",
-        "question": "Case column_store_tradeoff_chain",
-        "passed": false,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "vectorized_execution_chain",
-        "suite": "multiturn",
-        "question": "Case vectorized_execution_chain",
-        "passed": false,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "confirmation_yes_continues_previous_topic",
-        "suite": "multiturn",
-        "question": "Yes",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch01.097"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch01.097",
-            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "fresh_definition_beats_stale_context",
-        "suite": "multiturn",
-        "question": "What is an atomic operation?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch01.097"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch01.097",
-            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
-          }
-        ],
-        "reason": "No retrieval in base mode"
-      },
-      {
         "case_id": "buffer_safety",
         "suite": "reasoning",
         "question": "Case buffer_safety",
@@ -510,39 +341,6 @@
         "reason": "No retrieval in base mode"
       },
       {
-        "case_id": "slot_relocation",
-        "suite": "reasoning_variants",
-        "question": "Case slot_relocation",
-        "passed": false,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "split_kind_change",
-        "suite": "reasoning_variants",
-        "question": "Case split_kind_change",
-        "passed": false,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "reason": "No retrieval in base mode"
-      },
-      {
-        "case_id": "simd_mask_change",
-        "suite": "reasoning_variants",
-        "question": "Case simd_mask_change",
-        "passed": false,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "reason": "No retrieval in base mode"
-      },
-      {
         "case_id": "distractor_hash_ranges",
         "suite": "regression",
         "question": "Why does a hash index struggle with range queries?",
@@ -596,14 +394,80 @@
         "expected_ids": [],
         "expected_content": [],
         "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "algorithms_reduction_direction",
+        "suite": "cross_domain",
+        "question": "When reducing problem X to problem Y, must I transform arbitrary instances of Y back into X? What must work in both directions instead?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "algorithms_pseudopolynomial",
+        "suite": "cross_domain",
+        "question": "SubsetSum has an O(nT) dynamic-programming algorithm. Why does that not establish P = NP when T is written in binary, and what changes if the numbers are written in unary?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "compiler_pass_minimization",
+        "suite": "cross_domain",
+        "question": "Why does the LLM Compiler paper minimize its optimization pass lists after searching for them? Explain what each of its three minimization steps does and when the process stops.",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "compiler_roundtrip_limit",
+        "suite": "cross_domain",
+        "question": "How does the LLM Compiler paper use round-tripping to check disassembled LLVM IR? Does failing to reproduce identical assembly necessarily prove that the IR is wrong?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "nist_cyber_recovery",
+        "suite": "cross_domain",
+        "question": "Why might ordinary disaster-recovery copies be inadequate after a production administrator is compromised? According to NIST, how should cyberattack recovery copies differ in storage, administration, and restoration?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
+      },
+      {
+        "case_id": "nist_encryption_limits",
+        "suite": "cross_domain",
+        "question": "If a storage array encrypts data at rest, does that protect it from an attacker controlling an authorized host? How does application-level end-to-end encryption change the protection and its operational costs?",
+        "passed": false,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "reason": "No retrieval in base mode"
       }
     ],
     "pass_rate": "0.0%"
   },
   "rag": {
     "mode": "rag",
-    "passed": 24,
-    "total": 34,
+    "passed": 23,
+    "total": 27,
     "cases": [
       {
         "case_id": "pinning_needed",
@@ -956,255 +820,6 @@
         ]
       },
       {
-        "case_id": "pinning_followup_why_needed",
-        "question": "why is that needed?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch05.084"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch05.084",
-            "text": "## 5.4 The Page Lifecycle: Pinning and Modifications\n\nWhen the execution engine requests a page from the `BufferManager`, it isn't just asking for a temporary copy of the data. It's entering into a co"
-          }
-        ],
-        "retrieved_ids": [
-          "ch08.013",
-          "ch08.090",
-          "ch02.049",
-          "ch11.039",
-          "ch07.032",
-          "ch08.088",
-          "ch09.016",
-          "ch07.080"
-        ]
-      },
-      {
-        "case_id": "bplus_followup_why_better",
-        "question": "why is it better?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch09.019"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch09.019",
-            "text": "## 9.2 Anatomy of a B+ Tree\n\nIn the last section, we saw that while hash indexes provide exceptional speed for point queries\u2014finding a single record by its key\u2014they are poorly suited for retrieving a "
-          }
-        ],
-        "retrieved_ids": [
-          "ch11.039",
-          "ch08.059",
-          "ch10.019",
-          "ch01.085",
-          "ch02.049",
-          "ch07.080",
-          "ch08.088",
-          "ch04.092"
-        ]
-      },
-      {
-        "case_id": "lru_followup_elaborate",
-        "question": "Elaborate on that.",
-        "passed": false,
-        "matched": 0,
-        "expected": 2,
-        "expected_ids": [
-          "ch06.044",
-          "ch06.045"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch06.044",
-            "text": "Let's break down a few key steps:\n\n- **Access 1:** A hit on page 1. It was previously the third-most-recently used page. The policy finds it in the map, removes it from its old position in the list, a"
-          },
-          {
-            "chunk_id": "ch06.045",
-            "text": "This trace shows the dynamism of the LRU policy. It constantly reorders pages based on access, ensuring that \"hot\" pages like 1 and 2 stay in the buffer, while \"cold\" pages like 3 are quickly identifi"
-          }
-        ],
-        "retrieved_ids": [
-          "ch14.077",
-          "ch08.094",
-          "ch11.021",
-          "ch11.030",
-          "ch15.016",
-          "ch08.107",
-          "ch02.031",
-          "ch12.119"
-        ]
-      },
-      {
-        "case_id": "sequence_set_hashing_contrast",
-        "question": "Does that mean we should always prefer it over hashing?",
-        "passed": false,
-        "matched": 0,
-        "expected": 2,
-        "expected_ids": [
-          "ch09.030",
-          "ch08.059"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch09.030",
-            "text": "### 9.2.3 The Sequence Set: The Key to Fast Range Scans\n\nThe true genius of the B+ Tree's design, and the feature that makes it so dominant for database indexing, is not just its shallow height but th"
-          },
-          {
-            "chunk_id": "ch08.059",
-            "text": "This table makes the choice clear. The hash index is a specialized tool, a drag racer optimized for a single, straight track: equality lookups. The B+ Tree is the all-terrain vehicle. It is very good "
-          }
-        ],
-        "retrieved_ids": [
-          "ch08.090",
-          "ch08.012",
-          "ch10.020",
-          "ch09.088",
-          "ch04.014",
-          "ch05.061",
-          "ch14.018",
-          "ch11.087"
-        ]
-      },
-      {
-        "case_id": "twoq_lru_answer_derived_chain",
-        "question": "Case twoq_lru_answer_derived_chain",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "retrieved_ids": [
-          "ch12.028",
-          "ch12.071",
-          "ch12.014",
-          "ch12.003",
-          "ch12.026",
-          "ch13.083",
-          "ch13.025",
-          "ch13.040"
-        ]
-      },
-      {
-        "case_id": "slotted_page_slot_entry_definition",
-        "question": "In that design, what exactly does each slto store?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch04.019"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch04.019",
-            "text": "#### `SlottedPage` in `14-buzzdb.cpp:166-186`\n\nThe definitions for the `Slot` struct and the `SlottedPage` class, including its constructor which initializes the slot directory.\n\n```cpp\n166\tstruct Slo"
-          }
-        ],
-        "retrieved_ids": [
-          "ch09.016",
-          "ch07.018",
-          "ch14.093",
-          "ch05.022",
-          "ch06.068",
-          "ch14.076",
-          "ch11.040",
-          "ch07.007"
-        ]
-      },
-      {
-        "case_id": "column_store_tradeoff_chain",
-        "question": "Case column_store_tradeoff_chain",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "retrieved_ids": [
-          "ch12.028",
-          "ch12.071",
-          "ch12.014",
-          "ch12.003",
-          "ch12.026",
-          "ch13.083",
-          "ch13.025",
-          "ch13.040"
-        ]
-      },
-      {
-        "case_id": "vectorized_execution_chain",
-        "question": "Case vectorized_execution_chain",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "retrieved_ids": [
-          "ch12.028",
-          "ch12.071",
-          "ch12.014",
-          "ch12.003",
-          "ch12.026",
-          "ch13.083",
-          "ch13.025",
-          "ch13.040"
-        ]
-      },
-      {
-        "case_id": "confirmation_yes_continues_previous_topic",
-        "question": "Yes",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch01.097"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch01.097",
-            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
-          }
-        ],
-        "retrieved_ids": [
-          "ch01.001",
-          "ch01.002",
-          "ch01.003",
-          "ch01.004",
-          "ch01.005",
-          "ch01.006",
-          "ch01.007",
-          "ch01.008"
-        ]
-      },
-      {
-        "case_id": "fresh_definition_beats_stale_context",
-        "question": "What is an atomic operation?",
-        "passed": true,
-        "matched": 1,
-        "expected": 1,
-        "expected_ids": [
-          "ch01.097"
-        ],
-        "expected_content": [
-          {
-            "chunk_id": "ch01.097",
-            "text": "This \"all-or-nothing\" requirement is the second core promise of a DBMS: **atomicity**. An atomic operation, or a transaction composed of many operations, is treated as a single, indivisible unit of wo"
-          }
-        ],
-        "retrieved_ids": [
-          "ch06.018",
-          "ch01.097",
-          "ch12.080",
-          "ch01.018",
-          "ch02.025",
-          "ch08.090",
-          "ch01.011",
-          "ch08.066"
-        ]
-      },
-      {
         "case_id": "buffer_safety",
         "question": "Case buffer_safety",
         "passed": true,
@@ -1319,63 +934,6 @@
         ]
       },
       {
-        "case_id": "slot_relocation",
-        "question": "Case slot_relocation",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "retrieved_ids": [
-          "ch12.028",
-          "ch12.071",
-          "ch12.014",
-          "ch12.003",
-          "ch12.026",
-          "ch13.083",
-          "ch13.025",
-          "ch13.040"
-        ]
-      },
-      {
-        "case_id": "split_kind_change",
-        "question": "Case split_kind_change",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "retrieved_ids": [
-          "ch12.028",
-          "ch12.071",
-          "ch12.014",
-          "ch12.003",
-          "ch12.026",
-          "ch13.083",
-          "ch13.025",
-          "ch13.040"
-        ]
-      },
-      {
-        "case_id": "simd_mask_change",
-        "question": "Case simd_mask_change",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "expected_content": [],
-        "retrieved_ids": [
-          "ch12.028",
-          "ch12.071",
-          "ch12.014",
-          "ch12.003",
-          "ch12.026",
-          "ch13.083",
-          "ch13.025",
-          "ch13.040"
-        ]
-      },
-      {
         "case_id": "distractor_hash_ranges",
         "question": "Why does a hash index struggle with range queries?",
         "passed": true,
@@ -1469,14 +1027,128 @@
           "ch07.044",
           "ch13.029"
         ]
+      },
+      {
+        "case_id": "algorithms_reduction_direction",
+        "question": "When reducing problem X to problem Y, must I transform arbitrary instances of Y back into X? What must work in both directions instead?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch03.002",
+          "ch10.117",
+          "ch02.097",
+          "ch04.050",
+          "ch15.091",
+          "ch04.002",
+          "ch08.007",
+          "ch05.006"
+        ]
+      },
+      {
+        "case_id": "algorithms_pseudopolynomial",
+        "question": "SubsetSum has an O(nT) dynamic-programming algorithm. Why does that not establish P = NP when T is written in binary, and what changes if the numbers are written in unary?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch07.080",
+          "ch05.097",
+          "ch08.090",
+          "ch12.002",
+          "ch10.020",
+          "ch08.021",
+          "ch07.052",
+          "ch02.093"
+        ]
+      },
+      {
+        "case_id": "compiler_pass_minimization",
+        "question": "Why does the LLM Compiler paper minimize its optimization pass lists after searching for them? Explain what each of its three minimization steps does and when the process stops.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch10.123",
+          "ch10.014",
+          "ch14.097",
+          "ch07.076",
+          "ch08.041",
+          "ch07.028",
+          "ch07.031",
+          "ch11.039"
+        ]
+      },
+      {
+        "case_id": "compiler_roundtrip_limit",
+        "question": "How does the LLM Compiler paper use round-tripping to check disassembled LLVM IR? Does failing to reproduce identical assembly necessarily prove that the IR is wrong?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch14.097",
+          "ch03.076",
+          "ch01.107",
+          "ch06.097",
+          "ch05.033",
+          "ch01.010",
+          "ch11.015",
+          "ch07.080"
+        ]
+      },
+      {
+        "case_id": "nist_cyber_recovery",
+        "question": "Why might ordinary disaster-recovery copies be inadequate after a production administrator is compromised? According to NIST, how should cyberattack recovery copies differ in storage, administration, and restoration?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch13.060",
+          "ch09.088",
+          "ch13.043",
+          "ch06.067",
+          "ch08.015",
+          "ch15.093",
+          "ch02.031",
+          "ch14.097"
+        ]
+      },
+      {
+        "case_id": "nist_encryption_limits",
+        "question": "If a storage array encrypts data at rest, does that protect it from an attacker controlling an authorized host? How does application-level end-to-end encryption change the protection and its operational costs?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "expected_content": [],
+        "retrieved_ids": [
+          "ch07.023",
+          "ch11.040",
+          "ch02.120",
+          "ch04.059",
+          "ch02.071",
+          "ch04.064",
+          "ch01.076",
+          "ch11.068"
+        ]
       }
     ],
-    "pass_rate": "70.6%"
+    "pass_rate": "85.2%"
   },
   "langchain_ensemble": {
     "mode": "langchain_ensemble",
-    "passed": 27,
-    "total": 34,
+    "passed": 26,
+    "total": 27,
     "cases": [
       {
         "case_id": "pinning_needed",
@@ -1753,278 +1425,6 @@
         ]
       },
       {
-        "case_id": "pinning_followup_why_needed",
-        "question": "why is that needed?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch05.084"
-        ],
-        "retrieved_ids": [
-          "ch08.013",
-          "ch06.008",
-          "ch01.085",
-          "ch01.001",
-          "ch07.032",
-          "ch14.091",
-          "ch05.023",
-          "ch02.098",
-          "ch08.059",
-          "ch03.068",
-          "ch04.005",
-          "ch12.105",
-          "ch10.019",
-          "ch15.032",
-          "ch07.074",
-          "ch03.047"
-        ]
-      },
-      {
-        "case_id": "bplus_followup_why_better",
-        "question": "why is it better?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch09.019"
-        ],
-        "retrieved_ids": [
-          "ch01.085",
-          "ch08.059",
-          "ch15.032",
-          "ch07.022",
-          "ch10.019",
-          "ch08.057",
-          "ch11.039",
-          "ch10.100",
-          "ch05.023",
-          "ch07.052",
-          "ch06.020",
-          "ch14.094",
-          "ch04.005",
-          "ch07.074"
-        ]
-      },
-      {
-        "case_id": "lru_followup_elaborate",
-        "question": "Elaborate on that.",
-        "passed": false,
-        "matched": 0,
-        "expected": 2,
-        "expected_ids": [
-          "ch06.044",
-          "ch06.045"
-        ],
-        "retrieved_ids": [
-          "ch14.077",
-          "ch06.008",
-          "ch08.094",
-          "ch12.093",
-          "ch11.021",
-          "ch11.053",
-          "ch11.030",
-          "ch10.001",
-          "ch08.107",
-          "ch01.060",
-          "ch02.031",
-          "ch05.112",
-          "ch12.119",
-          "ch12.040",
-          "ch05.098",
-          "ch12.084"
-        ]
-      },
-      {
-        "case_id": "sequence_set_hashing_contrast",
-        "question": "Does that mean we should always prefer it over hashing?",
-        "passed": false,
-        "matched": 1,
-        "expected": 2,
-        "expected_ids": [
-          "ch09.030",
-          "ch08.059"
-        ],
-        "retrieved_ids": [
-          "ch03.095",
-          "ch08.057",
-          "ch08.090",
-          "ch08.087",
-          "ch04.014",
-          "ch08.001",
-          "ch01.001",
-          "ch08.088",
-          "ch10.020",
-          "ch08.059",
-          "ch09.088",
-          "ch13.090",
-          "ch01.013",
-          "ch13.097",
-          "ch04.016",
-          "ch07.052"
-        ]
-      },
-      {
-        "case_id": "twoq_lru_answer_derived_chain",
-        "question": "Case twoq_lru_answer_derived_chain",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "retrieved_ids": [
-          "ch06.056",
-          "ch15.058",
-          "ch14.048",
-          "ch15.062",
-          "ch15.094",
-          "ch05.096",
-          "ch06.064",
-          "ch05.088",
-          "ch11.037",
-          "ch05.089",
-          "ch12.040",
-          "ch05.090",
-          "ch06.078",
-          "ch05.091",
-          "ch12.042"
-        ]
-      },
-      {
-        "case_id": "slotted_page_slot_entry_definition",
-        "question": "In that design, what exactly does each slto store?",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch04.019"
-        ],
-        "retrieved_ids": [
-          "ch05.022",
-          "ch15.009",
-          "ch09.016",
-          "ch15.048",
-          "ch14.093",
-          "ch03.001",
-          "ch14.076",
-          "ch15.046",
-          "ch02.088",
-          "ch15.020",
-          "ch04.094",
-          "ch04.032",
-          "ch04.059",
-          "ch15.022",
-          "ch02.005",
-          "ch15.005"
-        ]
-      },
-      {
-        "case_id": "column_store_tradeoff_chain",
-        "question": "Case column_store_tradeoff_chain",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "retrieved_ids": [
-          "ch15.058",
-          "ch15.048",
-          "ch15.062",
-          "ch15.073",
-          "ch15.094",
-          "ch15.053",
-          "ch05.096",
-          "ch14.013",
-          "ch05.088",
-          "ch02.017",
-          "ch05.089",
-          "ch15.001",
-          "ch05.090",
-          "ch15.020",
-          "ch05.091",
-          "ch07.030"
-        ]
-      },
-      {
-        "case_id": "vectorized_execution_chain",
-        "question": "Case vectorized_execution_chain",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "retrieved_ids": [
-          "ch15.058",
-          "ch15.076",
-          "ch15.062",
-          "ch13.075",
-          "ch15.094",
-          "ch14.083",
-          "ch05.096",
-          "ch15.045",
-          "ch05.088",
-          "ch02.039",
-          "ch05.089",
-          "ch14.066",
-          "ch05.090",
-          "ch12.040",
-          "ch05.091",
-          "ch13.074"
-        ]
-      },
-      {
-        "case_id": "confirmation_yes_continues_previous_topic",
-        "question": "Yes",
-        "passed": false,
-        "matched": 0,
-        "expected": 1,
-        "expected_ids": [
-          "ch01.097"
-        ],
-        "retrieved_ids": [
-          "ch15.094",
-          "ch11.022",
-          "ch05.086",
-          "ch12.058",
-          "ch05.088",
-          "ch13.058",
-          "ch05.089",
-          "ch06.074",
-          "ch05.090",
-          "ch12.084",
-          "ch05.091",
-          "ch12.001",
-          "ch05.092",
-          "ch11.052",
-          "ch05.093",
-          "ch12.057"
-        ]
-      },
-      {
-        "case_id": "fresh_definition_beats_stale_context",
-        "question": "What is an atomic operation?",
-        "passed": true,
-        "matched": 1,
-        "expected": 1,
-        "expected_ids": [
-          "ch01.097"
-        ],
-        "retrieved_ids": [
-          "ch01.097",
-          "ch06.018",
-          "ch14.001",
-          "ch12.080",
-          "ch11.069",
-          "ch02.025",
-          "ch12.093",
-          "ch08.090",
-          "ch12.062",
-          "ch05.052",
-          "ch06.008",
-          "ch12.099",
-          "ch14.054",
-          "ch02.049",
-          "ch14.055"
-        ]
-      },
-      {
         "case_id": "buffer_safety",
         "question": "Case buffer_safety",
         "passed": true,
@@ -2176,83 +1576,6 @@
         ]
       },
       {
-        "case_id": "slot_relocation",
-        "question": "Case slot_relocation",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "retrieved_ids": [
-          "ch15.058",
-          "ch04.032",
-          "ch15.062",
-          "ch04.034",
-          "ch15.094",
-          "ch04.028",
-          "ch05.096",
-          "ch04.043",
-          "ch05.088",
-          "ch04.042",
-          "ch05.089",
-          "ch07.057",
-          "ch05.090",
-          "ch06.001",
-          "ch05.091",
-          "ch03.040"
-        ]
-      },
-      {
-        "case_id": "split_kind_change",
-        "question": "Case split_kind_change",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "retrieved_ids": [
-          "ch02.004",
-          "ch15.058",
-          "ch02.011",
-          "ch15.062",
-          "ch09.065",
-          "ch15.094",
-          "ch05.096",
-          "ch05.088",
-          "ch08.081",
-          "ch05.089",
-          "ch09.075",
-          "ch05.090",
-          "ch09.050",
-          "ch05.091",
-          "ch09.093"
-        ]
-      },
-      {
-        "case_id": "simd_mask_change",
-        "question": "Case simd_mask_change",
-        "passed": true,
-        "matched": 0,
-        "expected": 0,
-        "expected_ids": [],
-        "retrieved_ids": [
-          "ch15.058",
-          "ch15.076",
-          "ch15.062",
-          "ch15.079",
-          "ch15.094",
-          "ch15.075",
-          "ch05.096",
-          "ch15.087",
-          "ch05.088",
-          "ch15.078",
-          "ch05.089",
-          "ch02.098",
-          "ch05.090",
-          "ch06.077",
-          "ch05.091",
-          "ch08.081"
-        ]
-      },
-      {
         "case_id": "distractor_hash_ranges",
         "question": "Why does a hash index struggle with range queries?",
         "passed": true,
@@ -2368,9 +1691,165 @@
           "ch13.095",
           "ch14.028"
         ]
+      },
+      {
+        "case_id": "algorithms_reduction_direction",
+        "question": "When reducing problem X to problem Y, must I transform arbitrary instances of Y back into X? What must work in both directions instead?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.091",
+          "ch01.006",
+          "ch03.002",
+          "ch14.064",
+          "ch06.037",
+          "ch02.087",
+          "ch02.097",
+          "ch06.001",
+          "ch05.006",
+          "ch09.094",
+          "ch04.070",
+          "ch13.068",
+          "ch04.050",
+          "ch03.102",
+          "ch08.007",
+          "ch02.120"
+        ]
+      },
+      {
+        "case_id": "algorithms_pseudopolynomial",
+        "question": "SubsetSum has an O(nT) dynamic-programming algorithm. Why does that not establish P = NP when T is written in binary, and what changes if the numbers are written in unary?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch07.080",
+          "ch11.087",
+          "ch05.097",
+          "ch10.074",
+          "ch12.002",
+          "ch02.120",
+          "ch02.106",
+          "ch02.008",
+          "ch04.059",
+          "ch06.001",
+          "ch02.093",
+          "ch15.079",
+          "ch04.011",
+          "ch13.058",
+          "ch06.075",
+          "ch01.059"
+        ]
+      },
+      {
+        "case_id": "compiler_pass_minimization",
+        "question": "Why does the LLM Compiler paper minimize its optimization pass lists after searching for them? Explain what each of its three minimization steps does and when the process stops.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch10.123",
+          "ch10.096",
+          "ch07.031",
+          "ch06.040",
+          "ch07.076",
+          "ch14.090",
+          "ch08.041",
+          "ch10.013",
+          "ch14.076",
+          "ch10.016",
+          "ch10.014",
+          "ch06.008",
+          "ch09.106",
+          "ch05.046",
+          "ch09.094",
+          "ch14.020"
+        ]
+      },
+      {
+        "case_id": "compiler_roundtrip_limit",
+        "question": "How does the LLM Compiler paper use round-tripping to check disassembled LLVM IR? Does failing to reproduce identical assembly necessarily prove that the IR is wrong?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch04.090",
+          "ch06.074",
+          "ch06.097",
+          "ch06.040",
+          "ch08.053",
+          "ch06.007",
+          "ch11.030",
+          "ch04.034",
+          "ch01.068",
+          "ch08.051",
+          "ch01.107",
+          "ch12.077",
+          "ch11.040",
+          "ch06.039",
+          "ch03.076",
+          "ch15.086"
+        ]
+      },
+      {
+        "case_id": "nist_cyber_recovery",
+        "question": "Why might ordinary disaster-recovery copies be inadequate after a production administrator is compromised? According to NIST, how should cyberattack recovery copies differ in storage, administration, and restoration?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.093",
+          "ch01.014",
+          "ch02.031",
+          "ch01.016",
+          "ch13.060",
+          "ch06.096",
+          "ch13.043",
+          "ch06.077",
+          "ch09.088",
+          "ch06.001",
+          "ch06.018",
+          "ch01.095",
+          "ch03.059",
+          "ch05.096",
+          "ch01.099",
+          "ch02.097"
+        ]
+      },
+      {
+        "case_id": "nist_encryption_limits",
+        "question": "If a storage array encrypts data at rest, does that protect it from an attacker controlling an authorized host? How does application-level end-to-end encryption change the protection and its operational costs?",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch02.071",
+          "ch10.001",
+          "ch11.040",
+          "ch15.031",
+          "ch03.076",
+          "ch08.067",
+          "ch01.107",
+          "ch03.075",
+          "ch07.023",
+          "ch03.001",
+          "ch01.076",
+          "ch06.001",
+          "ch06.067",
+          "ch01.016",
+          "ch09.094",
+          "ch08.041"
+        ]
       }
     ],
-    "pass_rate": "79.4%"
+    "pass_rate": "96.3%"
   },
   "tokensmith": {
     "mode": "tokensmith",

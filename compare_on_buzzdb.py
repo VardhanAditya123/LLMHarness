@@ -37,18 +37,17 @@ from systems.langchain_ensemble import LangchainEnsemble
 FIXTURE_PATH = TOKENSMITH_ROOT / "tests" / "fixtures" / "buzzdb" / "buzzdb-book.tokensmith.md"
 BENCHMARK_DIR = TOKENSMITH_ROOT / "tests" / "benchmarks"
 
-# All available BuzzDB test suites
+# All available BuzzDB test suites (matching TokenSmith's test_buzzdb_embeddings.py)
 CASE_SUITES = [
     ("grounding", BENCHMARK_DIR / "buzzdb_grounding_cases.json"),
-    ("multiturn", BENCHMARK_DIR / "buzzdb_multiturn_cases.json"),
     ("reasoning", BENCHMARK_DIR / "buzzdb_reasoning_cases.json"),
-    ("reasoning_variants", BENCHMARK_DIR / "buzzdb_reasoning_variants.json"),
     ("regression", BENCHMARK_DIR / "buzzdb_regression_cases.json"),
+    ("cross_domain", BENCHMARK_DIR / "cross_domain_cases.json"),
 ]
 
 
 def load_cases(max_cases=None):
-    """Load all BuzzDB test suites (34 total cases)"""
+    """Load BuzzDB test suites matching TokenSmith's test (27 total cases)"""
     all_cases = []
     
     for suite_name, case_path in CASE_SUITES:
@@ -577,7 +576,7 @@ def main():
     
     # Summary with clean formatting and analysis
     print("\n" + "="*80)
-    print("SUMMARY: 4-MODE COMPARISON (34 Cases Across All Suites)")
+    print("SUMMARY: 4-MODE COMPARISON (27 Cases - Matching TokenSmith's test_buzzdb_embeddings.py)")
     print("="*80 + "\n")
     
     # Build summary table with proper alignment
@@ -589,15 +588,16 @@ def main():
     ]
     
     # Print header
-    print(f"  {'Mode':<20} | {'Passed':<8} | {'Pass Rate':<10}")
-    print("  " + "-"*44)
+    print(f"  {'Mode':<20} | {'Passed':<8} | {'Pass Rate':<10} | {'Cases':<8}")
+    print("  " + "-"*58)
     
     # Print rows
     for mode_name, mode_data in modes:
         passed = mode_data['passed']
         total = mode_data['total']
         rate = mode_data['pass_rate']
-        print(f"  {mode_name:<20} | {passed:>2}/{total:<2} | {rate:>8}")
+        case_label = "27 (official)" if mode_name == "TOKENSMITH" else f"{total} (full suite)"
+        print(f"  {mode_name:<20} | {passed:>2}/{total:<2} | {rate:>8} | {case_label:<8}")
     
     print("\n" + "="*80)
     
@@ -623,8 +623,11 @@ def main():
     if ts_passed > 0:
         gap_pct = (ts_passed - le_passed) / ts_passed * 100
         print(f"\n  • LangchainEnsemble vs TokenSmith:")
-        print(f"    └─ {le_passed}/34 vs {ts_passed}/21 (TS covers 21 cases only)")
-        print(f"    └─ Gap: {gap_pct:.1f}% below TokenSmith official")
+        print(f"    └─ {le_passed}/27 vs {ts_passed}/27 (same test suite: grounding+reasoning+regression+cross_domain)")
+        if gap_pct > 0:
+            print(f"    └─ Gap: {gap_pct:.1f}% below TokenSmith official")
+        else:
+            print(f"    └─ Matches TokenSmith performance!")
     
     print(f"\n  💡 Key Insight: Hybrid (vector+BM25) beats keyword-only by {le_passed-rag_passed} cases")
     print("="*80 + "\n")
