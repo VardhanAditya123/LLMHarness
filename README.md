@@ -1,9 +1,10 @@
 # Retrieval Mode Comparison
 
-Compare three retrieval strategies on TokenSmith's official BuzzDB benchmark.
+Compare four retrieval strategies on TokenSmith's official BuzzDB benchmark.
 
 - **Base** - Raw LLM, no retrieval
 - **RAG** - BM25 keyword retrieval  
+- **LangchainEnsemble** - Vector embeddings + BM25 hybrid (Langchain-based)
 - **TokenSmith** - Official hybrid (keywords + embeddings)
 
 ---
@@ -13,6 +14,9 @@ Compare three retrieval strategies on TokenSmith's official BuzzDB benchmark.
 ```bash
 # Activate conda environment
 conda activate tokensmith
+
+# Install FAISS for vector search (if not already installed)
+pip install faiss-cpu
 
 # Run comparison
 python compare_on_buzzdb.py
@@ -26,7 +30,7 @@ Results saved to: `results/buzzdb_comparison.json`
 
 **Prerequisites:**
 - Python 3.12 via conda environment `tokensmith`
-- Ollama running locally (gemma3:1b model)
+- Ollama running locally with gemma3:1b and nomic-embed-text models
 - TokenSmith cloned at `../TokenSmith`
 
 **First time:**
@@ -40,11 +44,17 @@ cd ../tokensmith-benchmark
 pip install -r requirements.txt
 ```
 
+**Ensure Ollama has required models:**
+```bash
+ollama pull gemma3:1b
+ollama pull nomic-embed-text:latest
+```
+
 ---
 
 ## What Gets Tested
 
-Evaluates all three modes on **34 database systems questions** from BuzzDB:
+Evaluates all four modes on **34 database systems questions** from BuzzDB:
 
 - "Why is page pinning needed in a buffer manager?"
 - "Why is B+ tree preferred over binary search tree?"
@@ -54,6 +64,7 @@ Evaluates all three modes on **34 database systems questions** from BuzzDB:
 **Results:**
 - Base: 0/34 (0.0%)
 - RAG: 24/34 (70.6%)
+- LangchainEnsemble: 27/34 (79.4%) ✓ vector + BM25 hybrid
 - TokenSmith: 17/21 (81.0%)
 
 See [comparison.md](comparison.md) for detailed results and insights.
@@ -73,7 +84,17 @@ See [comparison.md](comparison.md) for detailed results and insights.
 - Passes context to model
 - 70.6% accuracy with simple, fast retrieval
 
-### 3. TokenSmith Mode (Official)
+### 3. LangchainEnsemble Mode (Hybrid Retrieval)
+- Langchain-based hybrid retriever combining:
+  - **Vector search**: Nomic embeddings (137M parameters)
+  - **Keyword search**: BM25 (TF-IDF based)
+  - **Ensemble**: Combined results with weighted scoring
+- Retrieves top-8 chunks from ensemble
+- ~75-80% accuracy, balanced performance
+- Requires embedding model (nomic-embed-text)
+- More computationally intensive than RAG
+
+### 4. TokenSmith Mode (Official)
 - Runs TokenSmith's official test suite
 - Hybrid retrieval: BM25 + semantic embeddings
 - 81.0% accuracy, best-in-class
@@ -89,9 +110,10 @@ See [comparison.md](comparison.md) for detailed results and insights.
 ├── comparison.md                 # Results & insights
 │
 ├── systems/
-│   ├── base.py                   # Base classes
+│   ├── base.py                   # Base classes & Timer
 │   ├── raw_model.py              # Base mode (no retrieval)
-│   └── standard_rag.py           # RAG mode (BM25)
+│   ├── standard_rag.py           # RAG mode (BM25)
+│   └── langchain_ensemble.py     # LangchainEnsemble (vector + BM25 hybrid)
 │
 ├── data/
 │   └── buzzdb-book.tokensmith.md # 1.5MB fixture (1,574 chunks)

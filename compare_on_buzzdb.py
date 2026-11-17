@@ -5,6 +5,7 @@ Compare retrieval modes on TokenSmith's BuzzDB benchmark.
 Compares:
 - Base: Raw model, no retrieval
 - RAG: BM25-based retrieval on BuzzDB chunks
+- LangchainEnsemble: Vector embeddings + BM25 hybrid (Langchain)
 - TokenSmith: Official TokenSmith benchmark (npm runner with all suites)
 """
 
@@ -29,6 +30,7 @@ from python_engine import tokensmith_store as store
 sys.path.insert(0, str(Path(__file__).parent))
 from systems.raw_model import RawModelQA
 from systems.standard_rag import StandardRAG
+from systems.langchain_ensemble import LangchainEnsemble
 
 
 # TokenSmith fixture paths
@@ -158,7 +160,7 @@ def load_buzzdb_chunks():
     
     if not chunks:
         print("Error: Failed to parse BuzzDB chunks")
-        return None, None, None
+        return None, None, None, None
     
     print(f"Loaded {len(chunks)} chunks from BuzzDB")
     
@@ -176,7 +178,7 @@ def load_buzzdb_chunks():
     
     print(f"Built index for {len(chunk_by_id)} chunks\n")
     
-    return chunk_by_id, chunk_texts, chunk_ids
+    return chunk_by_id, chunk_texts, chunk_ids, chunks
 
 
 def run_rag_mode(cases, chunk_by_id, chunk_texts, chunk_ids):
@@ -265,64 +267,271 @@ def run_rag_mode(cases, chunk_by_id, chunk_texts, chunk_ids):
     return results
 
 
-def run_tokensmith_mode():
-    """Run TokenSmith's actual BuzzDB test suite"""
+def run_langchain_ensemble_mode(cases, chunks_data, chunk_texts, chunk_ids):
+    """Compare Langchain Ensemble mode (Vector embeddings + BM25 hybrid)"""
     print("\n" + "="*80)
-    print("TOKENSMITH MODE: BuzzDB retrieval test suite")
+    print("LANGCHAIN ENSEMBLE MODE: Vector embeddings + BM25 hybrid")
     print("="*80 + "\n")
     
-    print("Running: python -m tests.benchmarks.test_buzzdb_grounding --json\n")
+    try:
+        # Initialize ensemble retriever
+        ensemble = LangchainEnsemble(
+            chunks_data=chunks_data,
+            chunk_texts=chunk_texts,
+            chunk_ids=chunk_ids,
+            embedding_model="nomic-embed-text:latest",
+            top_k=8,
+            bm25_weight=0.5,
+            vector_weight=0.5
+        )
+    except Exception as e:
+        print(f"⚠ Failed to initialize Langchain Ensemble: {e}")
+        return {
+            "mode": "langchain_ensemble",
+            "passed": 0,
+            "total": len(cases),
+            "pass_rate": "0.0%",
+            "cases": [],
+            "error": str(e)
+        }
+    
+    results = {
+        "mode": "langchain_ensemble",
+        "passed": 0,
+        "total": len(cases),
+        "cases": []
+    }
+    
+    # Retrieve chunks for each case
+    for i, case in enumerate(cases):
+        question = get_query_text(case)
+        expected_ids = get_expected_chunks(case)
+        min_expected = int(case.get("minExpectedHits", len(expected_ids)))
+        
+        try:
+            # Get answer from ensemble (which returns retrieved chunks)
+            qa_answer = ensemble.answer(question)
+            
+            # Extract retrieved chunk IDs from metadata
+            retrieved_ids = qa_answer.metadata.get("retrieved_chunk_ids", [])
+            
+            # Evaluate
+            matched = [cid for cid in expected_ids if cid in retrieved_ids]
+            passed = len(matched) >= min_expected
+            
+            if passed:
+                results["passed"] += 1
+            
+            results["cases"].append({
+                "case_id": case["id"],
+                "question": question,
+                "passed": passed,
+                "matched": len(matched),
+                "expected": min_expected,
+                "expected_ids": expected_ids,
+                "retrieved_ids": retrieved_ids
+            })
+            
+            if (i + 1) % 5 == 0:
+                print(f"  Processed {i + 1}/{len(cases)} cases")
+        
+        except Exception as e:
+            results["cases"].append({
+                "case_id": case["id"],
+                "question": question,
+                "passed": False,
+                "matched": 0,
+                "expected": min_expected,
+                "error": str(e)
+            })
+    
+    results["pass_rate"] = f"{100 * results['passed'] / len(cases):.1f}%"
+    
+    print(f"\nPassed: {results['passed']}/{results['total']} ({results['pass_rate']})\n")
+    
+    return results
+
+
+def normalize_text(value):
+    """Normalize text for comparison (from TokenSmith test)"""
+    text = str(value).casefold().replace("*", "").replace("`", "")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def run_tokensmith_mode():
+    """Run TokenSmith's official vector-based hybrid retrieval test via unittest"""
+    print("\n" + "="*80)
+    print("TOKENSMITH MODE: Vector-based hybrid retrieval (FAISS 1.15.0 + keyword fallback)")
+    print("="*80 + "\n")
+    
+    print("Running: TOKENSMITH_RUN_EMBEDDING_BENCHMARK=1 python tests/benchmarks/test_buzzdb_embeddings.py --json\n")
+    
+    # Build env with TOKENSMITH_RUN_EMBEDDING_BENCHMARK=1
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(TOKENSMITH_ROOT)
+    env["TOKENSMITH_RUN_EMBEDDING_BENCHMARK"] = "1"
     
     result = subprocess.run(
-        ["python", "-m", "tests.benchmarks.test_buzzdb_grounding", "--json"],
+        "python tests/benchmarks/test_buzzdb_embeddings.py --json",
         cwd=str(TOKENSMITH_ROOT),
         capture_output=True,
         text=True,
-        env={**os.environ, "PYTHONPATH": str(TOKENSMITH_ROOT)}
+        env=env,
+        shell=True,
+        timeout=300  # 5 min timeout for embedding generation
     )
     
+    # Default result structure
     results = {
         "mode": "tokensmith",
         "passed": 0,
         "total": 0,
         "pass_rate": "0%",
-        "cases": [],
+        "cases": []
     }
     
-    # Parse JSON output (can be in stdout or stderr)
-    output = result.stdout.strip() or result.stderr.strip()
+    # Combine stdout and stderr
+    output = result.stdout.strip()
+    if result.stderr:
+        output += "\n" + result.stderr.strip()
     
     if not output:
-        results["error"] = f"No output from test (exit code {result.returncode})"
+        results["error"] = f"Test failed with exit code {result.returncode}. No output."
+        print(f"✗ Error: {results['error']}")
         return results
     
     try:
-        # Get last JSON object (in case of multiple lines)
-        output_lines = [l for l in output.split('\n') if l.strip()]
-        json_line = output_lines[-1]
-        test_results = json.loads(json_line)
+        lines = output.split('\n')
         
-        results["passed"] = test_results.get("passed", 0)
-        results["total"] = test_results.get("total", 0)
+        # Look for JSON output (--json flag outputs JSON at the end)
+        json_line = None
+        for line in reversed(lines):
+            line = line.strip()
+            if line.startswith('{') and '"passed"' in line:
+                json_line = line
+                break
         
-        if results["total"] > 0:
-            results["pass_rate"] = f"{100 * results['passed'] / results['total']:.1f}%"
+        if json_line:
+            # Parse the JSON report from TokenSmith test
+            report = json.loads(json_line)
+            results["passed"] = report.get("passed", 0)
+            results["total"] = report.get("total", 0)
+            
+            if results["total"] > 0:
+                results["pass_rate"] = f"{100 * results['passed'] / results['total']:.1f}%"
+            
+            # Load grounding cases to extract questions
+            grounding_cases_path = BENCHMARK_DIR / "buzzdb_grounding_cases.json"
+            cross_domain_cases_path = BENCHMARK_DIR / "buzzdb_reasoning_variants.json"
+            
+            case_by_id = {}
+            if grounding_cases_path.exists():
+                for case in json.loads(grounding_cases_path.read_text(encoding="utf-8")):
+                    case_by_id[case["id"]] = case
+            if cross_domain_cases_path.exists():
+                for case in json.loads(cross_domain_cases_path.read_text(encoding="utf-8")):
+                    case_by_id[case["id"]] = case
+            
+            # Extract case details with questions and evidence
+            for case in report.get("cases", []):
+                case_id = case.get("id")
+                lookup = case_by_id.get(case_id, {})
+                
+                # Extract evidence (chunks retrieved)
+                evidence = case.get("evidence", [])
+                chunk_summary = []
+                for ev in evidence:
+                    chunk_ids = ev.get("chunkIds", [])
+                    section = ev.get("section", "")
+                    if chunk_ids:
+                        chunk_summary.append({
+                            "chunk_ids": chunk_ids,
+                            "section": section[:100] if section else "(no section)"
+                        })
+                
+                results["cases"].append({
+                    "case_id": case_id,
+                    "question": lookup.get("question", lookup.get("prompt", case_id)),
+                    "passed": case.get("passed", False),
+                    "failures": case.get("failures", []),
+                    "retrieved_chunks": chunk_summary
+                })
+            
+            status = "✓" if results["passed"] == results["total"] else "⚠"
+            print(f"{status} Ollama Nomic hybrid benchmark: {results['passed']}/{results['total']} questions")
+            print(f"Passed: {results['passed']}/{results['total']} ({results['pass_rate']})\n")
+            
+            # Display sample questions and retrieved chunks (first 3 cases)
+            print("Sample cases (questions & retrieved chunks):\n")
+            for i, case in enumerate(results["cases"][:3]):
+                print(f"  [{i+1}] {case['case_id']}")
+                print(f"      Q: {case['question'][:80]}{'...' if len(case['question']) > 80 else ''}")
+                if case['retrieved_chunks']:
+                    for chunk_info in case['retrieved_chunks'][:2]:  # Show first 2 chunk retrieval groups
+                        chunk_ids_str = ", ".join(chunk_info['chunk_ids'][:3])  # First 3 IDs
+                        if len(chunk_info['chunk_ids']) > 3:
+                            chunk_ids_str += f", +{len(chunk_info['chunk_ids'])-3} more"
+                        print(f"      Chunks: {chunk_ids_str}")
+                        if chunk_info['section']:
+                            print(f"      Section: {chunk_info['section']}")
+                else:
+                    print(f"      Chunks: (keyword fallback, no vectors)")
+                print()
+            
+            if len(results["cases"]) > 3:
+                print(f"  ... and {len(results['cases']) - 3} more cases\n")
+            
+            # Show first 3 failures if any
+            if results["passed"] < results["total"]:
+                print("Failed cases:")
+                fail_count = 0
+                for case in results["cases"]:
+                    if not case.get("passed") and fail_count < 3:
+                        failures_str = "; ".join(case.get("failures", ["unknown"])[:1])
+                        print(f"  ✗ {case.get('case_id', 'unknown'):40} {failures_str}")
+                        fail_count += 1
+                if len([c for c in results["cases"] if not c.get("passed")]) > 3:
+                    print(f"  ... and {len([c for c in results['cases'] if not c.get('passed')]) - 3} more")
+                print()
+            
+            return results
         
-        # Store case details
-        for case in test_results.get("cases", []):
-            results["cases"].append({
-                "case_id": case.get("id"),
-                "passed": case.get("passed", False),
-                "failures": case.get("failures", []),
-                "hits": case.get("hits", [])
-            })
+        # Fallback: look for TokenSmith's benchmark line
+        benchmark_line = None
+        for line in lines:
+            if "Ollama Nomic hybrid benchmark:" in line:
+                benchmark_line = line
+                break
+        
+        if benchmark_line:
+            import re
+            match = re.search(r'(\d+)/(\d+)\s+questions', benchmark_line)
+            if match:
+                results["passed"] = int(match.group(1))
+                results["total"] = int(match.group(2))
+                results["pass_rate"] = f"{100 * results['passed'] / results['total']:.1f}%" if results["total"] > 0 else "0%"
+                
+                status = "✓" if results["passed"] == results["total"] else "⚠"
+                print(f"{status} Ollama Nomic hybrid benchmark: {results['passed']}/{results['total']} questions")
+                print(f"\nPassed: {results['passed']}/{results['total']} ({results['pass_rate']})\n")
+                return results
+        
+        # No JSON and no benchmark line found
+        results["error"] = f"Could not parse test output. Exit code: {result.returncode}"
+        print(f"✗ Error: {results['error']}")
+        print("Output:")
+        for line in lines[-20:]:
+            if line.strip():
+                print(f"  {line}")
         
     except json.JSONDecodeError as e:
-        print(f"Error parsing test output: {e}")
-        results["error"] = str(e)
-        results["raw_output"] = output[:500]
-    
-    print(f"Test Results: {results['passed']}/{results['total']} ({results['pass_rate']})\n")
+        results["error"] = f"JSON parse error: {e}"
+        print(f"✗ Error: {results['error']}")
+    except Exception as e:
+        results["error"] = f"Unexpected error: {str(e)}"
+        print(f"✗ Error: {results['error']}")
+        import traceback
+        traceback.print_exc()
     
     return results
 
@@ -355,7 +564,7 @@ def main():
     
     # Load chunks once for all modes
     print()
-    chunk_by_id, chunk_texts, chunk_ids = load_buzzdb_chunks()
+    chunk_by_id, chunk_texts, chunk_ids, chunks_data = load_buzzdb_chunks()
     if chunk_by_id is None:
         print("Failed to load chunks")
         sys.exit(1)
@@ -363,19 +572,62 @@ def main():
     # Run comparisons
     base_results = run_base_mode(cases, chunk_by_id)
     rag_results = run_rag_mode(cases, chunk_by_id, chunk_texts, chunk_ids)
+    langchain_results = run_langchain_ensemble_mode(cases, chunks_data, chunk_texts, chunk_ids)
     tokensmith_results = run_tokensmith_mode()
     
-    # Summary
+    # Summary with clean formatting and analysis
     print("\n" + "="*80)
-    print("SUMMARY: 3-MODE COMPARISON (34 Cases Across All Suites)")
+    print("SUMMARY: 4-MODE COMPARISON (34 Cases Across All Suites)")
     print("="*80 + "\n")
     
-    print("| Mode | Passed | Total | Pass Rate |")
-    print("|------|--------|-------|-----------|")
-    print(f"| Base | {base_results['passed']} | {base_results['total']} | {base_results['pass_rate']} |")
-    print(f"| RAG  | {rag_results['passed']} | {rag_results['total']} | {rag_results['pass_rate']} |")
-    print(f"| TokenSmith | {tokensmith_results['passed']} | {tokensmith_results['total']} | {tokensmith_results['pass_rate']} |")
-    print("")
+    # Build summary table with proper alignment
+    modes = [
+        ("BASE", base_results),
+        ("RAG", rag_results),
+        ("LANGCHAIN_ENSEMBLE", langchain_results),
+        ("TOKENSMITH", tokensmith_results)
+    ]
+    
+    # Print header
+    print(f"  {'Mode':<20} | {'Passed':<8} | {'Pass Rate':<10}")
+    print("  " + "-"*44)
+    
+    # Print rows
+    for mode_name, mode_data in modes:
+        passed = mode_data['passed']
+        total = mode_data['total']
+        rate = mode_data['pass_rate']
+        print(f"  {mode_name:<20} | {passed:>2}/{total:<2} | {rate:>8}")
+    
+    print("\n" + "="*80)
+    
+    # Rudimentary analysis
+    print("\n📊 ANALYSIS:\n")
+    
+    le_passed = langchain_results['passed']
+    rag_passed = rag_results['passed']
+    base_passed = base_results['passed']
+    ts_passed = tokensmith_results['passed']
+    
+    # Improvement over base
+    print(f"  • LangchainEnsemble vs Base:")
+    print(f"    └─ +{le_passed - base_passed} cases ({le_passed/base_results['total']*100:.1f}% pass rate)")
+    
+    # Improvement over RAG
+    if le_passed > rag_passed:
+        improvement_pct = (le_passed - rag_passed) / rag_passed * 100
+        print(f"\n  • LangchainEnsemble vs RAG:")
+        print(f"    └─ +{le_passed - rag_passed} cases (+{improvement_pct:.1f}% improvement)")
+    
+    # Gap to TokenSmith
+    if ts_passed > 0:
+        gap_pct = (ts_passed - le_passed) / ts_passed * 100
+        print(f"\n  • LangchainEnsemble vs TokenSmith:")
+        print(f"    └─ {le_passed}/34 vs {ts_passed}/21 (TS covers 21 cases only)")
+        print(f"    └─ Gap: {gap_pct:.1f}% below TokenSmith official")
+    
+    print(f"\n  💡 Key Insight: Hybrid (vector+BM25) beats keyword-only by {le_passed-rag_passed} cases")
+    print("="*80 + "\n")
     
     # Save results
     results_file = Path(__file__).parent / "results" / "buzzdb_comparison.json"
@@ -383,6 +635,7 @@ def main():
     results_file.write_text(json.dumps({
         "base": base_results,
         "rag": rag_results,
+        "langchain_ensemble": langchain_results,
         "tokensmith": tokensmith_results
     }, indent=2))
     print(f"✓ Results saved to {results_file}\n")

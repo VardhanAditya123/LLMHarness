@@ -1473,340 +1473,2361 @@
     ],
     "pass_rate": "70.6%"
   },
-  "tokensmith": {
-    "mode": "tokensmith",
-    "passed": 17,
-    "total": 21,
-    "pass_rate": "81.0%",
+  "langchain_ensemble": {
+    "mode": "langchain_ensemble",
+    "passed": 27,
+    "total": 34,
     "cases": [
       {
         "case_id": "pinning_needed",
+        "question": "Why is page pinning needed in a buffer manager?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 2,
+        "expected": 1,
+        "expected_ids": [
+          "ch05.084",
+          "ch05.090"
+        ],
+        "retrieved_ids": [
           "ch05.084",
           "ch05.090",
-          "ch06.037",
-          "ch05.102",
-          "ch05.116",
-          "ch05.101",
           "ch05.088",
-          "ch05.091"
+          "ch06.095",
+          "ch05.045",
+          "ch06.001",
+          "ch06.002",
+          "ch05.092",
+          "ch06.055",
+          "ch05.089",
+          "ch05.062",
+          "ch06.068",
+          "ch06.008",
+          "ch06.012"
         ]
       },
       {
         "case_id": "lru_sequential_scan",
+        "question": "What is sequential flooding and why does it make LRU fail?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 3,
+        "expected": 1,
+        "expected_ids": [
           "ch06.012",
           "ch05.119",
+          "ch06.064"
+        ],
+        "retrieved_ids": [
           "ch06.064",
-          "ch06.055",
-          "ch06.057",
-          "ch06.019",
           "ch05.122",
-          "ch13.093"
+          "ch05.119",
+          "ch06.012",
+          "ch07.080",
+          "ch06.083",
+          "ch06.019",
+          "ch03.095",
+          "ch06.055",
+          "ch08.090",
+          "ch05.075",
+          "ch05.023",
+          "ch06.063"
         ]
       },
       {
         "case_id": "bplus_vs_binary_tree",
+        "question": "Why is a B+ tree preferred over a binary search tree for disk-based database indexes?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 2,
+        "expected": 1,
+        "expected_ids": [
           "ch09.019",
+          "ch09.023"
+        ],
+        "retrieved_ids": [
           "ch08.058",
           "ch09.023",
+          "ch09.019",
+          "ch08.059",
+          "ch04.071",
+          "ch09.001",
           "ch07.024",
+          "ch10.001",
+          "ch09.090",
+          "ch09.099",
           "ch07.040",
-          "ch10.087",
-          "ch07.051",
-          "ch10.051"
+          "ch09.103"
         ]
       },
       {
         "case_id": "hash_range_queries",
+        "question": "Why does a hash index struggle with range queries?",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch09.001",
+        "matched": 4,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.002",
+          "ch08.057",
           "ch09.013",
-          "ch09.015",
+          "ch09.015"
+        ],
+        "retrieved_ids": [
           "ch08.057",
           "ch09.002",
+          "ch09.001",
+          "ch08.090",
+          "ch08.054",
+          "ch09.015",
+          "ch08.001",
           "ch08.058",
-          "ch10.007",
-          "ch08.059"
+          "ch09.013",
+          "ch08.059",
+          "ch09.016",
+          "ch08.041",
+          "ch09.009"
         ]
       },
       {
         "case_id": "bplus_sequence_set",
+        "question": "Why does the B+ tree sequence set make range scans efficient?",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch09.101",
-          "ch09.102",
+        "matched": 4,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.021",
           "ch09.030",
           "ch09.033",
+          "ch09.102"
+        ],
+        "retrieved_ids": [
+          "ch08.058",
+          "ch09.033",
+          "ch09.047",
+          "ch09.001",
+          "ch09.030",
+          "ch05.082",
           "ch09.031",
-          "ch09.021",
+          "ch06.086",
+          "ch09.102",
           "ch08.059",
-          "ch10.007"
+          "ch10.020",
+          "ch09.101",
+          "ch09.021",
+          "ch09.103"
         ]
       },
       {
         "case_id": "aggregation_grouping",
-        "passed": true,
-        "failures": [],
-        "hits": [
-          "ch13.060",
+        "question": "How does BuzzDB implement GROUP BY aggregation with a hash table?",
+        "passed": false,
+        "matched": 1,
+        "expected": 2,
+        "expected_ids": [
           "ch13.022",
-          "ch13.080",
-          "ch13.081",
-          "ch13.079",
-          "ch14.054",
-          "ch14.084",
+          "ch13.028",
           "ch13.052"
+        ],
+        "retrieved_ids": [
+          "ch13.080",
+          "ch08.065",
+          "ch13.081",
+          "ch13.060",
+          "ch01.077",
+          "ch13.092",
+          "ch13.026",
+          "ch13.036",
+          "ch13.022",
+          "ch13.025",
+          "ch13.029",
+          "ch13.045",
+          "ch14.062",
+          "ch07.037",
+          "ch14.010"
         ]
       },
       {
         "case_id": "wal_write_ordering",
+        "question": "Why does write-ahead logging require write ordering control in the buffer manager?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 2,
+        "expected": 1,
+        "expected_ids": [
           "ch05.016",
-          "ch06.096",
-          "ch01.105",
-          "ch05.013",
-          "ch09.013",
-          "ch08.015",
+          "ch06.096"
+        ],
+        "retrieved_ids": [
+          "ch05.016",
           "ch06.095",
-          "ch03.048"
+          "ch03.103",
+          "ch05.117",
+          "ch02.100",
+          "ch05.096",
+          "ch13.074",
+          "ch06.096",
+          "ch06.068",
+          "ch06.001",
+          "ch03.014",
+          "ch07.074",
+          "ch06.033",
+          "ch03.028",
+          "ch06.028"
         ]
       },
       {
         "case_id": "oltp_vs_olap",
+        "question": "What is the difference between OLTP and OLAP workloads?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 3,
+        "expected": 2,
+        "expected_ids": [
           "ch15.002",
           "ch15.008",
-          "ch15.012",
-          "ch10.126",
+          "ch15.012"
+        ],
+        "retrieved_ids": [
           "ch15.009",
+          "ch15.012",
+          "ch15.018",
+          "ch10.126",
+          "ch15.008",
+          "ch15.006",
+          "ch15.005",
+          "ch01.085",
+          "ch15.004",
+          "ch02.054",
           "ch15.011",
-          "ch15.020",
-          "ch15.006"
+          "ch15.010",
+          "ch15.002"
         ]
       },
       {
         "case_id": "column_store_analytics",
+        "question": "Why is a column store faster for analytical queries that read only a few columns?",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch15.052",
-          "ch15.074",
-          "ch15.049",
+        "matched": 2,
+        "expected": 1,
+        "expected_ids": [
           "ch15.021",
-          "ch15.039",
-          "ch15.001",
+          "ch15.032",
+          "ch15.039"
+        ],
+        "retrieved_ids": [
+          "ch15.046",
+          "ch15.052",
+          "ch15.021",
           "ch15.020",
-          "ch15.032"
+          "ch15.001",
+          "ch15.049",
+          "ch15.039",
+          "ch15.008",
+          "ch15.048",
+          "ch01.085",
+          "ch15.074",
+          "ch14.097"
         ]
       },
       {
         "case_id": "volcano_iterator_model_alias",
+        "question": "Why is the Volcano model inefficient for analytical queries?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 2,
+        "expected": 2,
+        "expected_ids": [
           "ch15.074",
-          "ch12.104",
-          "ch15.021",
-          "ch14.082",
-          "ch15.080",
+          "ch15.080"
+        ],
+        "retrieved_ids": [
           "ch14.095",
-          "ch11.001",
-          "ch13.059"
+          "ch08.057",
+          "ch15.080",
+          "ch10.085",
+          "ch10.125",
+          "ch07.079",
+          "ch07.032",
+          "ch02.049",
+          "ch01.084",
+          "ch15.074",
+          "ch08.049",
+          "ch10.127",
+          "ch03.098",
+          "ch08.088",
+          "ch07.029"
+        ]
+      },
+      {
+        "case_id": "pinning_followup_why_needed",
+        "question": "why is that needed?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch05.084"
+        ],
+        "retrieved_ids": [
+          "ch08.013",
+          "ch06.008",
+          "ch01.085",
+          "ch01.001",
+          "ch07.032",
+          "ch14.091",
+          "ch05.023",
+          "ch02.098",
+          "ch08.059",
+          "ch03.068",
+          "ch04.005",
+          "ch12.105",
+          "ch10.019",
+          "ch15.032",
+          "ch07.074",
+          "ch03.047"
+        ]
+      },
+      {
+        "case_id": "bplus_followup_why_better",
+        "question": "why is it better?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch09.019"
+        ],
+        "retrieved_ids": [
+          "ch01.085",
+          "ch08.059",
+          "ch15.032",
+          "ch07.022",
+          "ch10.019",
+          "ch08.057",
+          "ch11.039",
+          "ch10.100",
+          "ch05.023",
+          "ch07.052",
+          "ch06.020",
+          "ch14.094",
+          "ch04.005",
+          "ch07.074"
+        ]
+      },
+      {
+        "case_id": "lru_followup_elaborate",
+        "question": "Elaborate on that.",
+        "passed": false,
+        "matched": 0,
+        "expected": 2,
+        "expected_ids": [
+          "ch06.044",
+          "ch06.045"
+        ],
+        "retrieved_ids": [
+          "ch14.077",
+          "ch06.008",
+          "ch08.094",
+          "ch12.093",
+          "ch11.021",
+          "ch11.053",
+          "ch11.030",
+          "ch10.001",
+          "ch08.107",
+          "ch01.060",
+          "ch02.031",
+          "ch05.112",
+          "ch12.119",
+          "ch12.040",
+          "ch05.098",
+          "ch12.084"
+        ]
+      },
+      {
+        "case_id": "sequence_set_hashing_contrast",
+        "question": "Does that mean we should always prefer it over hashing?",
+        "passed": false,
+        "matched": 1,
+        "expected": 2,
+        "expected_ids": [
+          "ch09.030",
+          "ch08.059"
+        ],
+        "retrieved_ids": [
+          "ch03.095",
+          "ch08.057",
+          "ch08.090",
+          "ch08.087",
+          "ch04.014",
+          "ch08.001",
+          "ch01.001",
+          "ch08.088",
+          "ch10.020",
+          "ch08.059",
+          "ch09.088",
+          "ch13.090",
+          "ch01.013",
+          "ch13.097",
+          "ch04.016",
+          "ch07.052"
+        ]
+      },
+      {
+        "case_id": "twoq_lru_answer_derived_chain",
+        "question": "Case twoq_lru_answer_derived_chain",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch06.056",
+          "ch15.058",
+          "ch14.048",
+          "ch15.062",
+          "ch15.094",
+          "ch05.096",
+          "ch06.064",
+          "ch05.088",
+          "ch11.037",
+          "ch05.089",
+          "ch12.040",
+          "ch05.090",
+          "ch06.078",
+          "ch05.091",
+          "ch12.042"
+        ]
+      },
+      {
+        "case_id": "slotted_page_slot_entry_definition",
+        "question": "In that design, what exactly does each slto store?",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch04.019"
+        ],
+        "retrieved_ids": [
+          "ch05.022",
+          "ch15.009",
+          "ch09.016",
+          "ch15.048",
+          "ch14.093",
+          "ch03.001",
+          "ch14.076",
+          "ch15.046",
+          "ch02.088",
+          "ch15.020",
+          "ch04.094",
+          "ch04.032",
+          "ch04.059",
+          "ch15.022",
+          "ch02.005",
+          "ch15.005"
+        ]
+      },
+      {
+        "case_id": "column_store_tradeoff_chain",
+        "question": "Case column_store_tradeoff_chain",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.058",
+          "ch15.048",
+          "ch15.062",
+          "ch15.073",
+          "ch15.094",
+          "ch15.053",
+          "ch05.096",
+          "ch14.013",
+          "ch05.088",
+          "ch02.017",
+          "ch05.089",
+          "ch15.001",
+          "ch05.090",
+          "ch15.020",
+          "ch05.091",
+          "ch07.030"
+        ]
+      },
+      {
+        "case_id": "vectorized_execution_chain",
+        "question": "Case vectorized_execution_chain",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.058",
+          "ch15.076",
+          "ch15.062",
+          "ch13.075",
+          "ch15.094",
+          "ch14.083",
+          "ch05.096",
+          "ch15.045",
+          "ch05.088",
+          "ch02.039",
+          "ch05.089",
+          "ch14.066",
+          "ch05.090",
+          "ch12.040",
+          "ch05.091",
+          "ch13.074"
+        ]
+      },
+      {
+        "case_id": "confirmation_yes_continues_previous_topic",
+        "question": "Yes",
+        "passed": false,
+        "matched": 0,
+        "expected": 1,
+        "expected_ids": [
+          "ch01.097"
+        ],
+        "retrieved_ids": [
+          "ch15.094",
+          "ch11.022",
+          "ch05.086",
+          "ch12.058",
+          "ch05.088",
+          "ch13.058",
+          "ch05.089",
+          "ch06.074",
+          "ch05.090",
+          "ch12.084",
+          "ch05.091",
+          "ch12.001",
+          "ch05.092",
+          "ch11.052",
+          "ch05.093",
+          "ch12.057"
+        ]
+      },
+      {
+        "case_id": "fresh_definition_beats_stale_context",
+        "question": "What is an atomic operation?",
+        "passed": true,
+        "matched": 1,
+        "expected": 1,
+        "expected_ids": [
+          "ch01.097"
+        ],
+        "retrieved_ids": [
+          "ch01.097",
+          "ch06.018",
+          "ch14.001",
+          "ch12.080",
+          "ch11.069",
+          "ch02.025",
+          "ch12.093",
+          "ch08.090",
+          "ch12.062",
+          "ch05.052",
+          "ch06.008",
+          "ch12.099",
+          "ch14.054",
+          "ch02.049",
+          "ch14.055"
         ]
       },
       {
         "case_id": "buffer_safety",
-        "passed": false,
-        "failures": [
-          "missing evidence group writeback: need one of ['ch05.097']",
-          "missing evidence group writeback context 'flushed before its frame can be reused'"
-        ],
-        "hits": [
-          "ch05.102",
-          "ch05.101",
-          "ch05.103",
-          "ch05.084",
-          "ch05.093",
-          "ch05.016",
+        "question": "Case buffer_safety",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch06.003",
           "ch05.088",
-          "ch11.077"
+          "ch15.058",
+          "ch06.033",
+          "ch15.062",
+          "ch05.001",
+          "ch15.094",
+          "ch06.001",
+          "ch05.096",
+          "ch06.060",
+          "ch05.089",
+          "ch05.090",
+          "ch06.053",
+          "ch05.091"
         ]
       },
       {
         "case_id": "twoq_trace",
+        "question": "Case twoq_trace",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
           "ch06.056",
-          "ch06.071",
+          "ch15.058",
+          "ch11.037",
+          "ch15.062",
+          "ch15.094",
+          "ch05.096",
           "ch06.060",
-          "ch06.061",
-          "ch06.062",
-          "ch06.065",
-          "ch06.067",
-          "ch06.072"
+          "ch05.088",
+          "ch11.059",
+          "ch05.089",
+          "ch06.080",
+          "ch05.090",
+          "ch14.048",
+          "ch05.091",
+          "ch11.078"
         ]
       },
       {
         "case_id": "aggregate_bug",
-        "passed": false,
-        "failures": [
-          "missing evidence group initialization: need one of ['ch13.045', 'ch13.052', 'ch13.082']"
-        ],
-        "hits": [
-          "ch08.012",
-          "ch13.043",
-          "ch09.045",
-          "ch13.042",
+        "question": "Case aggregate_bug",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.058",
           "ch13.025",
-          "ch13.096",
+          "ch15.062",
           "ch13.039",
-          "ch13.060"
+          "ch15.094",
+          "ch13.007",
+          "ch05.096",
+          "ch13.001",
+          "ch05.088",
+          "ch13.083",
+          "ch05.089",
+          "ch08.053",
+          "ch05.090",
+          "ch13.088",
+          "ch05.091",
+          "ch13.040"
         ]
       },
       {
         "case_id": "column_pages",
+        "question": "Case column_pages",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch15.024",
-          "ch15.042",
-          "ch15.093",
-          "ch15.051",
-          "ch07.065",
-          "ch07.062",
-          "ch07.061",
-          "ch03.087"
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch02.052",
+          "ch15.058",
+          "ch02.058",
+          "ch15.062",
+          "ch03.034",
+          "ch15.094",
+          "ch15.043",
+          "ch05.096",
+          "ch03.021",
+          "ch05.088",
+          "ch05.089",
+          "ch05.090",
+          "ch04.083",
+          "ch05.091",
+          "ch02.053"
         ]
       },
       {
         "case_id": "aggregation_tradeoffs",
-        "passed": false,
-        "failures": [
-          "missing evidence group memory: need one of ['ch13.090', 'ch13.093']",
-          "missing evidence group memory context 'number of distinct groups'",
-          "missing evidence group ordering: need one of ['ch13.092', 'ch13.093']",
-          "missing evidence group ordering context 'unordered'",
-          "missing evidence group spilling_not_implemented: need one of ['ch13.093']",
-          "missing evidence group spilling_not_implemented context \"Simple in-memory versions (like BuzzDB's) fail\""
-        ],
-        "hits": [
-          "ch09.106",
-          "ch13.022",
-          "ch07.031",
-          "ch15.018",
-          "ch09.099",
-          "ch13.048",
-          "ch13.020",
-          "ch13.088"
+        "question": "Case aggregation_tradeoffs",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.058",
+          "ch14.062",
+          "ch15.062",
+          "ch13.025",
+          "ch15.094",
+          "ch13.040",
+          "ch05.096",
+          "ch13.026",
+          "ch05.088",
+          "ch13.007",
+          "ch05.089",
+          "ch13.001",
+          "ch05.090",
+          "ch13.023",
+          "ch05.091",
+          "ch13.083"
         ]
       },
       {
         "case_id": "batch_speedup",
+        "question": "Case batch_speedup",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch15.091",
-          "ch15.081",
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch05.096",
+          "ch15.058",
+          "ch15.062",
+          "ch01.086",
           "ch15.094",
-          "ch15.090",
-          "ch02.065",
-          "ch12.117",
-          "ch12.118",
-          "ch15.038"
+          "ch15.076",
+          "ch15.079",
+          "ch05.088",
+          "ch05.059",
+          "ch05.089",
+          "ch15.084",
+          "ch05.090",
+          "ch05.062",
+          "ch05.091",
+          "ch03.100"
+        ]
+      },
+      {
+        "case_id": "slot_relocation",
+        "question": "Case slot_relocation",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.058",
+          "ch04.032",
+          "ch15.062",
+          "ch04.034",
+          "ch15.094",
+          "ch04.028",
+          "ch05.096",
+          "ch04.043",
+          "ch05.088",
+          "ch04.042",
+          "ch05.089",
+          "ch07.057",
+          "ch05.090",
+          "ch06.001",
+          "ch05.091",
+          "ch03.040"
+        ]
+      },
+      {
+        "case_id": "split_kind_change",
+        "question": "Case split_kind_change",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch02.004",
+          "ch15.058",
+          "ch02.011",
+          "ch15.062",
+          "ch09.065",
+          "ch15.094",
+          "ch05.096",
+          "ch05.088",
+          "ch08.081",
+          "ch05.089",
+          "ch09.075",
+          "ch05.090",
+          "ch09.050",
+          "ch05.091",
+          "ch09.093"
+        ]
+      },
+      {
+        "case_id": "simd_mask_change",
+        "question": "Case simd_mask_change",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch15.058",
+          "ch15.076",
+          "ch15.062",
+          "ch15.079",
+          "ch15.094",
+          "ch15.075",
+          "ch05.096",
+          "ch15.087",
+          "ch05.088",
+          "ch15.078",
+          "ch05.089",
+          "ch02.098",
+          "ch05.090",
+          "ch06.077",
+          "ch05.091",
+          "ch08.081"
         ]
       },
       {
         "case_id": "distractor_hash_ranges",
+        "question": "Why does a hash index struggle with range queries?",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch09.001",
-          "ch09.013",
-          "ch09.015",
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
           "ch08.057",
           "ch09.002",
+          "ch09.001",
+          "ch08.090",
+          "ch08.054",
+          "ch09.015",
+          "ch08.001",
           "ch08.058",
-          "ch10.007",
-          "ch08.059"
+          "ch09.013",
+          "ch08.059",
+          "ch09.016",
+          "ch08.041",
+          "ch09.009"
         ]
       },
       {
         "case_id": "distractor_group_totals",
+        "question": "While reading sales rows one at a time, how can the engine maintain a separate running total for every region without sorting first?",
         "passed": true,
-        "failures": [],
-        "hits": [
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
           "ch07.032",
-          "ch13.088",
           "ch13.008",
           "ch13.006",
-          "ch13.009",
-          "ch13.087",
-          "ch01.077",
-          "ch11.015"
+          "ch13.011",
+          "ch13.022",
+          "ch13.069",
+          "ch07.044",
+          "ch15.021",
+          "ch01.008",
+          "ch01.064",
+          "ch13.010",
+          "ch08.074",
+          "ch13.016"
         ]
       },
       {
         "case_id": "pinning_vs_durability",
+        "question": "Does pinning a dirty page make its changes durable? Explain what pinning and write-ahead logging each guarantee before that page can be written to disk or its frame reused.",
         "passed": true,
-        "failures": [],
-        "hits": [
-          "ch05.016",
-          "ch05.097",
-          "ch05.102",
-          "ch06.096",
-          "ch05.088",
-          "ch05.101",
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
           "ch05.093",
-          "ch05.103"
+          "ch05.084",
+          "ch05.088",
+          "ch05.097",
+          "ch05.016",
+          "ch05.103",
+          "ch04.089",
+          "ch05.102",
+          "ch05.096",
+          "ch02.119",
+          "ch11.050",
+          "ch04.012",
+          "ch05.101",
+          "ch06.096"
         ]
       },
       {
         "case_id": "code_hash_missing_sentinel",
-        "passed": false,
-        "failures": [
-          "missing evidence group lookup-result: need one of ['ch07.017', 'ch07.035', 'ch07.055', 'ch08.003', 'ch08.009', 'ch08.016']",
-          "missing evidence group lookup-result context 'return it != hash_index.end() ? it->second : -1;'"
-        ],
-        "hits": [
+        "question": "In the book's v024 HashIndex backed by std::unordered_map, what does getValue return for an absent key? If a present key stores -1, can a caller distinguish these two cases using the returned integer alone? Use this implementation rather than a redesigned API.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch08.009",
+          "ch08.003",
           "ch01.068",
-          "ch02.004",
-          "ch02.022",
-          "ch03.060",
-          "ch03.068",
-          "ch10.033",
-          "ch07.031",
-          "ch12.107"
+          "ch08.064",
+          "ch08.068",
+          "ch08.019",
+          "ch07.029",
+          "ch08.010",
+          "ch02.071",
+          "ch08.047",
+          "ch15.062",
+          "ch13.036",
+          "ch07.050",
+          "ch07.026"
         ]
       },
       {
         "case_id": "table_sales_product_region",
+        "question": "In the small Sales example introducing GROUP BY region, restrict the input to product_id 101. What are its North and South subtotals, and which region has the larger subtotal? Show the contributing rows; do not use each region's total across all products.",
+        "passed": true,
+        "matched": 0,
+        "expected": 0,
+        "expected_ids": [],
+        "retrieved_ids": [
+          "ch13.011",
+          "ch13.009",
+          "ch13.008",
+          "ch13.006",
+          "ch13.013",
+          "ch13.080",
+          "ch13.012",
+          "ch13.029",
+          "ch13.014",
+          "ch13.010",
+          "ch13.017",
+          "ch13.095",
+          "ch14.028"
+        ]
+      }
+    ],
+    "pass_rate": "79.4%"
+  },
+  "tokensmith": {
+    "mode": "tokensmith",
+    "passed": 27,
+    "total": 27,
+    "pass_rate": "100.0%",
+    "cases": [
+      {
+        "case_id": "pinning_needed",
+        "question": "Why is page pinning needed in a buffer manager?",
         "passed": true,
         "failures": [],
-        "hits": [
-          "ch13.011",
-          "ch13.016",
-          "ch13.013",
-          "ch13.012",
-          "ch13.008",
-          "ch13.015",
-          "ch13.017",
-          "ch13.006"
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch05.084"
+            ],
+            "section": "5.4 The Page Lifecycle: Pinning and Modifications"
+          },
+          {
+            "chunk_ids": [
+              "ch05.088"
+            ],
+            "section": "5.4 The Page Lifecycle: Pinning and Modifications"
+          },
+          {
+            "chunk_ids": [
+              "ch05.089"
+            ],
+            "section": "5.4.1 The Pinning Contract"
+          },
+          {
+            "chunk_ids": [
+              "ch05.090"
+            ],
+            "section": "5.4.1 The Pinning Contract"
+          },
+          {
+            "chunk_ids": [
+              "ch06.002"
+            ],
+            "section": "6.1 The Limits of a Single Strategy"
+          },
+          {
+            "chunk_ids": [
+              "ch06.016"
+            ],
+            "section": "6.1.2 When LRU Fails: The Sequential Scan"
+          },
+          {
+            "chunk_ids": [
+              "ch06.037"
+            ],
+            "section": "6.3 Implementing Classic Policies"
+          },
+          {
+            "chunk_ids": [
+              "ch05.091"
+            ],
+            "section": "5.4.1 The Pinning Contract"
+          }
+        ]
+      },
+      {
+        "case_id": "lru_sequential_scan",
+        "question": "What is sequential flooding and why does it make LRU fail?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch06.012"
+            ],
+            "section": "6.1.2 When LRU Fails: The Sequential Scan"
+          },
+          {
+            "chunk_ids": [
+              "ch05.119"
+            ],
+            "section": "5.5.2 Impact on Table Scans"
+          },
+          {
+            "chunk_ids": [
+              "ch06.064"
+            ],
+            "section": "6.4.2.1 Worked Example: Surviving a Scan"
+          },
+          {
+            "chunk_ids": [
+              "ch06.055"
+            ],
+            "section": "6.4 Beyond LRU: The Two-Queue Policy"
+          },
+          {
+            "chunk_ids": [
+              "ch06.057"
+            ],
+            "section": "6.4.1 A Tale of Two Queues"
+          },
+          {
+            "chunk_ids": [
+              "ch06.091"
+            ],
+            "section": "6.6.2 From Policies to Hints"
+          },
+          {
+            "chunk_ids": [
+              "ch06.081"
+            ],
+            "section": "6.5.3 Interpreting the Results"
+          },
+          {
+            "chunk_ids": [
+              "ch06.059"
+            ],
+            "section": "6.4.1 A Tale of Two Queues"
+          }
+        ]
+      },
+      {
+        "case_id": "bplus_vs_binary_tree",
+        "question": "Why is a B+ tree preferred over a binary search tree for disk-based database indexes?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch09.019"
+            ],
+            "section": "9.2 Anatomy of a B+ Tree"
+          },
+          {
+            "chunk_ids": [
+              "ch08.058"
+            ],
+            "section": "8.3.3 Hash Index vs. B+ Tree: The Big Picture"
+          },
+          {
+            "chunk_ids": [
+              "ch09.023"
+            ],
+            "section": "9.2.1 A Search Tree Designed for Disk"
+          },
+          {
+            "chunk_ids": [
+              "ch10.051"
+            ],
+            "section": "10.3 Indexing Text: Inverted Indexes and Tries"
+          },
+          {
+            "chunk_ids": [
+              "ch10.002"
+            ],
+            "section": "10.1 Beyond B+ Trees: When One Size Doesn't Fit All"
+          },
+          {
+            "chunk_ids": [
+              "ch09.101"
+            ],
+            "section": "9.4.3 B-Trees vs. B+ Trees: A Common Point of Confusion"
+          },
+          {
+            "chunk_ids": [
+              "ch07.051"
+            ],
+            "section": "7.3.3 The Trade-off: Generality vs. Specialization"
+          },
+          {
+            "chunk_ids": [
+              "ch09.001"
+            ],
+            "section": "Chapter 9. B+ Trees"
+          }
+        ]
+      },
+      {
+        "case_id": "hash_range_queries",
+        "question": "Why does a hash index struggle with range queries?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch09.001"
+            ],
+            "section": "Chapter 9. B+ Trees"
+          },
+          {
+            "chunk_ids": [
+              "ch09.002"
+            ],
+            "section": "9.1 Why Hash Indexes Fall Short"
+          },
+          {
+            "chunk_ids": [
+              "ch08.057"
+            ],
+            "section": "8.3.2 The Achilles' Heel: Range Queries"
+          },
+          {
+            "chunk_ids": [
+              "ch09.015"
+            ],
+            "section": "9.1.2 A Tale of Two Indexes: A Performance Benchmark"
+          },
+          {
+            "chunk_ids": [
+              "ch08.058"
+            ],
+            "section": "8.3.3 Hash Index vs. B+ Tree: The Big Picture"
+          },
+          {
+            "chunk_ids": [
+              "ch08.055"
+            ],
+            "section": "8.3.2 The Achilles' Heel: Range Queries"
+          },
+          {
+            "chunk_ids": [
+              "ch08.045"
+            ],
+            "section": "8.3 Performance, Strengths, and Weaknesses"
+          },
+          {
+            "chunk_ids": [
+              "ch08.059"
+            ],
+            "section": "8.3.3 Hash Index vs. B+ Tree: The Big Picture"
+          }
+        ]
+      },
+      {
+        "case_id": "bplus_sequence_set",
+        "question": "Why does the B+ tree sequence set make range scans efficient?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch09.033"
+            ],
+            "section": "9.2.3 The Sequence Set: The Key to Fast Range Scans"
+          },
+          {
+            "chunk_ids": [
+              "ch09.021"
+            ],
+            "section": "9.2 Anatomy of a B+ Tree"
+          },
+          {
+            "chunk_ids": [
+              "ch09.101"
+            ],
+            "section": "9.4.3 B-Trees vs. B+ Trees: A Common Point of Confusion"
+          },
+          {
+            "chunk_ids": [
+              "ch09.102"
+            ],
+            "section": "9.4.3 B-Trees vs. B+ Trees: A Common Point of Confusion"
+          },
+          {
+            "chunk_ids": [
+              "ch09.031"
+            ],
+            "section": "9.2.3 The Sequence Set: The Key to Fast Range Scans"
+          },
+          {
+            "chunk_ids": [
+              "ch09.032"
+            ],
+            "section": "9.2.3 The Sequence Set: The Key to Fast Range Scans"
+          },
+          {
+            "chunk_ids": [
+              "ch09.030"
+            ],
+            "section": "9.2.3 The Sequence Set: The Key to Fast Range Scans"
+          },
+          {
+            "chunk_ids": [
+              "ch08.058"
+            ],
+            "section": "8.3.3 Hash Index vs. B+ Tree: The Big Picture"
+          }
+        ]
+      },
+      {
+        "case_id": "aggregation_grouping",
+        "question": "How does BuzzDB implement GROUP BY aggregation with a hash table?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch13.022"
+            ],
+            "section": "13.2 Implementing Aggregation with a Hash Table"
+          },
+          {
+            "chunk_ids": [
+              "ch13.081"
+            ],
+            "section": "13.5 Broader Context and Alternative Strategies"
+          },
+          {
+            "chunk_ids": [
+              "ch13.028"
+            ],
+            "section": "13.2.1 Anatomy of the Aggregation Operator"
+          },
+          {
+            "chunk_ids": [
+              "ch13.093"
+            ],
+            "section": "13.5.2 Hashing vs. Sorting: The Trade-offs"
+          },
+          {
+            "chunk_ids": [
+              "ch13.045"
+            ],
+            "section": "13.3 The Pipeline Breaker: A Blocking Operator"
+          },
+          {
+            "chunk_ids": [
+              "ch13.085"
+            ],
+            "section": "13.5.1 Alternative: Sorting-Based Aggregation"
+          },
+          {
+            "chunk_ids": [
+              "ch13.052"
+            ],
+            "section": "13.3.2 Code Deep Dive: The `open()` Method"
+          },
+          {
+            "chunk_ids": [
+              "ch13.092"
+            ],
+            "section": "13.5.2 Hashing vs. Sorting: The Trade-offs"
+          }
+        ]
+      },
+      {
+        "case_id": "wal_write_ordering",
+        "question": "Why does write-ahead logging require write ordering control in the buffer manager?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch05.016"
+            ],
+            "section": "5.1.3 Why Not Just Use the Operating System's Cache?"
+          },
+          {
+            "chunk_ids": [
+              "ch06.096"
+            ],
+            "section": "6.6.4 Why Databases Don't Just Use the OS Cache"
+          },
+          {
+            "chunk_ids": [
+              "ch01.105"
+            ],
+            "section": "1.5.4 The Road Ahead"
+          },
+          {
+            "chunk_ids": [
+              "ch05.013"
+            ],
+            "section": "5.1.3 Why Not Just Use the Operating System's Cache?"
+          },
+          {
+            "chunk_ids": [
+              "ch05.097"
+            ],
+            "section": "5.4.3 Flushing Pages to Disk"
+          },
+          {
+            "chunk_ids": [
+              "ch06.095"
+            ],
+            "section": "6.6.4 Why Databases Don't Just Use the OS Cache"
+          },
+          {
+            "chunk_ids": [
+              "ch01.018"
+            ],
+            "section": "1.1.3 The Database as a System"
+          },
+          {
+            "chunk_ids": [
+              "ch05.095"
+            ],
+            "section": "5.4.2 Tracking Changes: The Dirty Bit Concept"
+          }
+        ]
+      },
+      {
+        "case_id": "oltp_vs_olap",
+        "question": "What is the difference between OLTP and OLAP workloads?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch15.002"
+            ],
+            "section": "15.1 The Two Worlds of Data: OLTP vs. OLAP"
+          },
+          {
+            "chunk_ids": [
+              "ch15.012"
+            ],
+            "section": "15.1.3 Why One Size Doesn't Fit All"
+          },
+          {
+            "chunk_ids": [
+              "ch15.008"
+            ],
+            "section": "15.1.2 The World of Analysis (OLAP)"
+          },
+          {
+            "chunk_ids": [
+              "ch15.009"
+            ],
+            "section": "15.1.3 Why One Size Doesn't Fit All"
+          },
+          {
+            "chunk_ids": [
+              "ch10.126"
+            ],
+            "section": "10.5.4 The Catch: Trade-offs and Limitations"
+          },
+          {
+            "chunk_ids": [
+              "ch15.048"
+            ],
+            "section": "15.2.4 The Other Side of the Coin: When Column Stores are Slow"
+          },
+          {
+            "chunk_ids": [
+              "ch10.125"
+            ],
+            "section": "10.5.4 The Catch: Trade-offs and Limitations"
+          },
+          {
+            "chunk_ids": [
+              "ch15.011"
+            ],
+            "section": "15.1.3 Why One Size Doesn't Fit All"
+          }
+        ]
+      },
+      {
+        "case_id": "column_store_analytics",
+        "question": "Why is a column store faster for analytical queries that read only a few columns?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch15.052"
+            ],
+            "section": "15.3 The Compression Advantage"
+          },
+          {
+            "chunk_ids": [
+              "ch15.021"
+            ],
+            "section": "15.2 A New Foundation: Column-Oriented Storage"
+          },
+          {
+            "chunk_ids": [
+              "ch15.046"
+            ],
+            "section": "15.2.4 The Other Side of the Coin: When Column Stores are Slow"
+          },
+          {
+            "chunk_ids": [
+              "ch15.039"
+            ],
+            "section": "15.2.2 The I/O Advantage in Action"
+          },
+          {
+            "chunk_ids": [
+              "ch15.074"
+            ],
+            "section": "15.4 From I/O to CPU: Vectorized Execution and SIMD"
+          },
+          {
+            "chunk_ids": [
+              "ch15.008"
+            ],
+            "section": "15.1.2 The World of Analysis (OLAP)"
+          },
+          {
+            "chunk_ids": [
+              "ch15.024"
+            ],
+            "section": "15.2 A New Foundation: Column-Oriented Storage"
+          },
+          {
+            "chunk_ids": [
+              "ch15.084"
+            ],
+            "section": "15.4.2 Unlocking Hardware Parallelism: SIMD"
+          }
+        ]
+      },
+      {
+        "case_id": "volcano_iterator_model_alias",
+        "question": "Why is the Volcano model inefficient for analytical queries?",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch15.074"
+            ],
+            "section": "15.4 From I/O to CPU: Vectorized Execution and SIMD"
+          },
+          {
+            "chunk_ids": [
+              "ch15.021"
+            ],
+            "section": "15.2 A New Foundation: Column-Oriented Storage"
+          },
+          {
+            "chunk_ids": [
+              "ch14.082"
+            ],
+            "section": "14.4.1 The Interpreter: Flexible but Slow"
+          },
+          {
+            "chunk_ids": [
+              "ch13.059"
+            ],
+            "section": "13.3.3 Producing the Final Result"
+          },
+          {
+            "chunk_ids": [
+              "ch14.095"
+            ],
+            "section": "14.4.3 The Performance Showdown"
+          },
+          {
+            "chunk_ids": [
+              "ch15.080"
+            ],
+            "section": "15.4 From I/O to CPU: Vectorized Execution and SIMD"
+          },
+          {
+            "chunk_ids": [
+              "ch11.016"
+            ],
+            "section": "11.2 The Iterator Model: A New Architecture for Execution"
+          },
+          {
+            "chunk_ids": [
+              "ch11.001"
+            ],
+            "section": "Chapter 11. Iterator Model and Operator Interfaces"
+          }
+        ]
+      },
+      {
+        "case_id": "buffer_safety",
+        "question": "buffer_safety",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch05.102"
+            ],
+            "section": "5.4.4 The Lifecycle of a Page in the Buffer"
+          },
+          {
+            "chunk_ids": [
+              "ch05.093"
+            ],
+            "section": "5.4.2 Tracking Changes: The Dirty Bit Concept"
+          },
+          {
+            "chunk_ids": [
+              "ch05.084"
+            ],
+            "section": "5.4 The Page Lifecycle: Pinning and Modifications"
+          },
+          {
+            "chunk_ids": [
+              "ch05.016"
+            ],
+            "section": "5.1.3 Why Not Just Use the Operating System's Cache?"
+          },
+          {
+            "chunk_ids": [
+              "ch05.097"
+            ],
+            "section": "5.4.3 Flushing Pages to Disk"
+          },
+          {
+            "chunk_ids": [
+              "ch05.101"
+            ],
+            "section": "5.4.4 The Lifecycle of a Page in the Buffer"
+          },
+          {
+            "chunk_ids": [
+              "ch06.037"
+            ],
+            "section": "6.3 Implementing Classic Policies"
+          },
+          {
+            "chunk_ids": [
+              "ch05.088"
+            ],
+            "section": "5.4 The Page Lifecycle: Pinning and Modifications"
+          }
+        ]
+      },
+      {
+        "case_id": "twoq_trace",
+        "question": "twoq_trace",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch06.056"
+            ],
+            "section": "6.4 Beyond LRU: The Two-Queue Policy"
+          },
+          {
+            "chunk_ids": [
+              "ch06.071"
+            ],
+            "section": "6.5 Measuring What Matters: Simulating Policy Performance"
+          },
+          {
+            "chunk_ids": [
+              "ch06.060"
+            ],
+            "section": "6.4.2 Tracing 2Q's Logic"
+          },
+          {
+            "chunk_ids": [
+              "ch06.065"
+            ],
+            "section": "6.4.2.1 Worked Example: Surviving a Scan"
+          },
+          {
+            "chunk_ids": [
+              "ch05.074"
+            ],
+            "section": "5.3.6 Worked Example: Tracing Page Requests"
+          },
+          {
+            "chunk_ids": [
+              "ch06.078"
+            ],
+            "section": "6.5.2 Anatomy of an Access Pattern"
+          },
+          {
+            "chunk_ids": [
+              "ch06.081"
+            ],
+            "section": "6.5.3 Interpreting the Results"
+          },
+          {
+            "chunk_ids": [
+              "ch06.066"
+            ],
+            "section": "6.4.2.1 Worked Example: Surviving a Scan"
+          }
+        ]
+      },
+      {
+        "case_id": "aggregate_bug",
+        "question": "aggregate_bug",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch13.042"
+            ],
+            "section": "13.2.4 Updating Aggregate State"
+          },
+          {
+            "chunk_ids": [
+              "ch13.025"
+            ],
+            "section": "13.2 Implementing Aggregation with a Hash Table"
+          },
+          {
+            "chunk_ids": [
+              "ch13.045"
+            ],
+            "section": "13.3 The Pipeline Breaker: A Blocking Operator"
+          },
+          {
+            "chunk_ids": [
+              "ch13.041"
+            ],
+            "section": "13.2.4 Updating Aggregate State"
+          },
+          {
+            "chunk_ids": [
+              "ch13.072"
+            ],
+            "section": "13.4.2.1 Phase 1: Materialization"
+          },
+          {
+            "chunk_ids": [
+              "ch13.039"
+            ],
+            "section": "13.2.4 Updating Aggregate State"
+          },
+          {
+            "chunk_ids": [
+              "ch13.067"
+            ],
+            "section": "13.4.1.2 The Plan After: Adding Aggregation"
+          },
+          {
+            "chunk_ids": [
+              "ch13.090"
+            ],
+            "section": "13.5.2 Hashing vs. Sorting: The Trade-offs"
+          }
+        ]
+      },
+      {
+        "case_id": "column_pages",
+        "question": "column_pages",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch15.042"
+            ],
+            "section": "15.2.3 Late Materialization: Rebuilding Tuples on Demand"
+          },
+          {
+            "chunk_ids": [
+              "ch15.024"
+            ],
+            "section": "15.2 A New Foundation: Column-Oriented Storage"
+          },
+          {
+            "chunk_ids": [
+              "ch15.038"
+            ],
+            "section": "15.2.2 The I/O Advantage in Action"
+          },
+          {
+            "chunk_ids": [
+              "ch15.040"
+            ],
+            "section": "15.2.3 Late Materialization: Rebuilding Tuples on Demand"
+          },
+          {
+            "chunk_ids": [
+              "ch15.034"
+            ],
+            "section": "15.2.2 The I/O Advantage in Action"
+          },
+          {
+            "chunk_ids": [
+              "ch07.056"
+            ],
+            "section": "7.4.1 Clustered Indexes: Ordering the Data File"
+          },
+          {
+            "chunk_ids": [
+              "ch15.093"
+            ],
+            "section": "15.4.4 Vectorizing a Page Scan"
+          },
+          {
+            "chunk_ids": [
+              "ch07.062"
+            ],
+            "section": "7.4.3 Performance Implications"
+          }
+        ]
+      },
+      {
+        "case_id": "aggregation_tradeoffs",
+        "question": "aggregation_tradeoffs",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch13.093"
+            ],
+            "section": "13.5.2 Hashing vs. Sorting: The Trade-offs"
+          },
+          {
+            "chunk_ids": [
+              "ch13.022"
+            ],
+            "section": "13.2 Implementing Aggregation with a Hash Table"
+          },
+          {
+            "chunk_ids": [
+              "ch13.092"
+            ],
+            "section": "13.5.2 Hashing vs. Sorting: The Trade-offs"
+          },
+          {
+            "chunk_ids": [
+              "ch13.048"
+            ],
+            "section": "13.3.1 Pipelined vs. Blocking Execution"
+          },
+          {
+            "chunk_ids": [
+              "ch13.061"
+            ],
+            "section": "13.4 Assembling an Aggregation Query Plan"
+          },
+          {
+            "chunk_ids": [
+              "ch13.084"
+            ],
+            "section": "13.5 Broader Context and Alternative Strategies"
+          },
+          {
+            "chunk_ids": [
+              "ch13.085"
+            ],
+            "section": "13.5.1 Alternative: Sorting-Based Aggregation"
+          },
+          {
+            "chunk_ids": [
+              "ch13.029"
+            ],
+            "section": "13.2.2 The Core Logic: Grouping with a Hash Table"
+          }
+        ]
+      },
+      {
+        "case_id": "batch_speedup",
+        "question": "batch_speedup",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch15.090"
+            ],
+            "section": "15.4.3 Putting It All Together: A SIMD-Accelerated Columnar Query"
+          },
+          {
+            "chunk_ids": [
+              "ch15.081"
+            ],
+            "section": "15.4.1 Beyond One Tuple at a Time: Vectorized Processing"
+          },
+          {
+            "chunk_ids": [
+              "ch01.087"
+            ],
+            "section": "1.4.3 If You Can't Measure It, You Can't Improve It"
+          },
+          {
+            "chunk_ids": [
+              "ch15.088"
+            ],
+            "section": "15.4.3 Putting It All Together: A SIMD-Accelerated Columnar Query"
+          },
+          {
+            "chunk_ids": [
+              "ch15.074"
+            ],
+            "section": "15.4 From I/O to CPU: Vectorized Execution and SIMD"
+          },
+          {
+            "chunk_ids": [
+              "ch03.096"
+            ],
+            "section": "3.4.3 The I/O Cost Model: Counting Pages"
+          },
+          {
+            "chunk_ids": [
+              "ch01.086"
+            ],
+            "section": "1.4.3 If You Can't Measure It, You Can't Improve It"
+          },
+          {
+            "chunk_ids": [
+              "ch12.117"
+            ],
+            "section": "12.5.2 Measuring a Filter's Power: Selectivity"
+          }
+        ]
+      },
+      {
+        "case_id": "distractor_hash_ranges",
+        "question": "distractor_hash_ranges",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch09.001"
+            ],
+            "section": "Chapter 9. B+ Trees"
+          },
+          {
+            "chunk_ids": [
+              "ch09.002"
+            ],
+            "section": "9.1 Why Hash Indexes Fall Short"
+          },
+          {
+            "chunk_ids": [
+              "ch08.057"
+            ],
+            "section": "8.3.2 The Achilles' Heel: Range Queries"
+          },
+          {
+            "chunk_ids": [
+              "ch09.015"
+            ],
+            "section": "9.1.2 A Tale of Two Indexes: A Performance Benchmark"
+          },
+          {
+            "chunk_ids": [
+              "ch08.058"
+            ],
+            "section": "8.3.3 Hash Index vs. B+ Tree: The Big Picture"
+          },
+          {
+            "chunk_ids": [
+              "ch08.055"
+            ],
+            "section": "8.3.2 The Achilles' Heel: Range Queries"
+          },
+          {
+            "chunk_ids": [
+              "ch08.045"
+            ],
+            "section": "8.3 Performance, Strengths, and Weaknesses"
+          },
+          {
+            "chunk_ids": [
+              "ch08.059"
+            ],
+            "section": "8.3.3 Hash Index vs. B+ Tree: The Big Picture"
+          }
+        ]
+      },
+      {
+        "case_id": "distractor_group_totals",
+        "question": "distractor_group_totals",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch07.032"
+            ],
+            "section": "7.3 A Tale of Two Indexes: Tree vs. Hash"
+          },
+          {
+            "chunk_ids": [
+              "ch13.006"
+            ],
+            "section": "13.1.1 The Limits of Pipelined Filtering"
+          },
+          {
+            "chunk_ids": [
+              "ch01.069"
+            ],
+            "section": "1.4 The Need for Speed and Structure"
+          },
+          {
+            "chunk_ids": [
+              "ch13.009"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch13.069"
+            ],
+            "section": "13.4.2 Tracing the Data Flow"
+          },
+          {
+            "chunk_ids": [
+              "ch13.008"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch13.088"
+            ],
+            "section": "13.5.1 Alternative: Sorting-Based Aggregation"
+          },
+          {
+            "chunk_ids": [
+              "ch13.017"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          }
+        ]
+      },
+      {
+        "case_id": "pinning_vs_durability",
+        "question": "pinning_vs_durability",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch05.097"
+            ],
+            "section": "5.4.3 Flushing Pages to Disk"
+          },
+          {
+            "chunk_ids": [
+              "ch05.016"
+            ],
+            "section": "5.1.3 Why Not Just Use the Operating System's Cache?"
+          },
+          {
+            "chunk_ids": [
+              "ch05.088"
+            ],
+            "section": "5.4 The Page Lifecycle: Pinning and Modifications"
+          },
+          {
+            "chunk_ids": [
+              "ch05.093"
+            ],
+            "section": "5.4.2 Tracking Changes: The Dirty Bit Concept"
+          },
+          {
+            "chunk_ids": [
+              "ch05.102"
+            ],
+            "section": "5.4.4 The Lifecycle of a Page in the Buffer"
+          },
+          {
+            "chunk_ids": [
+              "ch05.084"
+            ],
+            "section": "5.4 The Page Lifecycle: Pinning and Modifications"
+          },
+          {
+            "chunk_ids": [
+              "ch06.096"
+            ],
+            "section": "6.6.4 Why Databases Don't Just Use the OS Cache"
+          },
+          {
+            "chunk_ids": [
+              "ch05.101"
+            ],
+            "section": "5.4.4 The Lifecycle of a Page in the Buffer"
+          }
+        ]
+      },
+      {
+        "case_id": "code_hash_missing_sentinel",
+        "question": "code_hash_missing_sentinel",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch08.009"
+            ],
+            "section": "8.1.2 A First Look: Hiding Complexity with `std::unordered_map`"
+          },
+          {
+            "chunk_ids": [
+              "ch08.016"
+            ],
+            "section": "8.2 From Scratch: Building a Static Hash Index"
+          },
+          {
+            "chunk_ids": [
+              "ch08.003"
+            ],
+            "section": "8.1 The Need for Speed: Hashing for Direct Access"
+          },
+          {
+            "chunk_ids": [
+              "ch07.035"
+            ],
+            "section": "7.3 A Tale of Two Indexes: Tree vs. Hash"
+          },
+          {
+            "chunk_ids": [
+              "ch07.029"
+            ],
+            "section": "7.2.2 Data Entries in BuzzDB: A Simplification"
+          },
+          {
+            "chunk_ids": [
+              "ch07.055"
+            ],
+            "section": "7.4 A Taxonomy of Indexes: Clustered vs. Unclustered"
+          },
+          {
+            "chunk_ids": [
+              "ch07.050"
+            ],
+            "section": "7.3.3 The Trade-off: Generality vs. Specialization"
+          },
+          {
+            "chunk_ids": [
+              "ch07.017"
+            ],
+            "section": "7.2 The Index Abstraction: Search Keys and Data Entries"
+          }
+        ]
+      },
+      {
+        "case_id": "table_sales_product_region",
+        "question": "table_sales_product_region",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "ch13.017"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch13.011"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch13.013"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch13.010"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch13.012"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          },
+          {
+            "chunk_ids": [
+              "ch15.002"
+            ],
+            "section": "15.1 The Two Worlds of Data: OLTP vs. OLAP"
+          },
+          {
+            "chunk_ids": [
+              "ch13.006"
+            ],
+            "section": "13.1.1 The Limits of Pipelined Filtering"
+          },
+          {
+            "chunk_ids": [
+              "ch13.009"
+            ],
+            "section": "13.1.2 Summarizing Data with Aggregates"
+          }
+        ]
+      },
+      {
+        "case_id": "algorithms_reduction_direction",
+        "question": "algorithms_reduction_direction",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "algorithms-reductions.002"
+            ],
+            "section": "## 12.8 The General Pattern"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.003"
+            ],
+            "section": "\u2022 Transform an arbitrary instance $x$ of $X$ into a special instance $y$ of $Y$ in polynomial time."
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.004"
+            ],
+            "section": "For example, our reduction from $\\text{CIRCUITSAT}$ to $\\text{3SAT}$ consists of three algorithms:"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-subset-sum.004"
+            ],
+            "section": "### Caveat Reductor!"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.005"
+            ],
+            "section": "Similarly, our reduction from $\\text{3SAT}$ to $\\text{MAXINDSET}$ consists of three algorithms:"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-subset-sum.005"
+            ],
+            "section": "## 12.13 Other Useful NP-hard Problems"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-subset-sum.001"
+            ],
+            "section": "12.12. Subset Sum (from Vertex Cover)"
+          }
+        ]
+      },
+      {
+        "case_id": "algorithms_pseudopolynomial",
+        "question": "algorithms_pseudopolynomial",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "algorithms-subset-sum.004"
+            ],
+            "section": "### Caveat Reductor!"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-subset-sum.001"
+            ],
+            "section": "12.12. Subset Sum (from Vertex Cover)"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.001"
+            ],
+            "section": "any value we like. Because $S$ contains one vertex in each clause triangle, each clause in $\\Phi$ co"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.002"
+            ],
+            "section": "## 12.8 The General Pattern"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-subset-sum.003"
+            ],
+            "section": "If we are looking for a vertex cover of size $k = 2$, our target sum would be $T := 222222_4 = 2730$"
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.003"
+            ],
+            "section": "\u2022 Transform an arbitrary instance $x$ of $X$ into a special instance $y$ of $Y$ in polynomial time."
+          },
+          {
+            "chunk_ids": [
+              "algorithms-reductions.004"
+            ],
+            "section": "For example, our reduction from $\\text{CIRCUITSAT}$ to $\\text{3SAT}$ consists of three algorithms:"
+          }
+        ]
+      },
+      {
+        "case_id": "compiler_pass_minimization",
+        "question": "compiler_pass_minimization",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "compiler.002"
+            ],
+            "section": "the resulting binary size. We then pick the per-program pass lists that produced the lowest binary s"
+          },
+          {
+            "chunk_ids": [
+              "compiler.001"
+            ],
+            "section": "[figure: see original page]"
+          },
+          {
+            "chunk_ids": [
+              "compiler.005"
+            ],
+            "section": "### 4 Training parameters"
+          },
+          {
+            "chunk_ids": [
+              "compiler.004"
+            ],
+            "section": "### 3.2 Instruction fine-tuning for disassembly"
+          },
+          {
+            "chunk_ids": [
+              "compiler.003"
+            ],
+            "section": "[figure: see original page]"
+          }
+        ]
+      },
+      {
+        "case_id": "compiler_roundtrip_limit",
+        "question": "compiler_roundtrip_limit",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "compiler.004"
+            ],
+            "section": "### 3.2 Instruction fine-tuning for disassembly"
+          },
+          {
+            "chunk_ids": [
+              "compiler.003"
+            ],
+            "section": "[figure: see original page]"
+          },
+          {
+            "chunk_ids": [
+              "compiler.002"
+            ],
+            "section": "the resulting binary size. We then pick the per-program pass lists that produced the lowest binary s"
+          },
+          {
+            "chunk_ids": [
+              "compiler.001"
+            ],
+            "section": "[figure: see original page]"
+          },
+          {
+            "chunk_ids": [
+              "compiler.005"
+            ],
+            "section": "### 4 Training parameters"
+          }
+        ]
+      },
+      {
+        "case_id": "nist_cyber_recovery",
+        "question": "nist_cyber_recovery",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "nist-recovery.003"
+            ],
+            "section": "NIST SP 800-209"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.002"
+            ],
+            "section": "### 4.7 Isolation"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.004"
+            ],
+            "section": "NIST SP 800-209"
+          },
+          {
+            "chunk_ids": [
+              "nist-encryption.005"
+            ],
+            "section": "**EN-SS-R6 \u2013 At-rest encryption of sensitive data:** At-rest encryption protects against a variety o"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.006"
+            ],
+            "section": "**IS-SS-R7 \u2013 Independence from hosts and applications:**"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.007"
+            ],
+            "section": "**IS-SS-R8 \u2013 Consider setting up an air gap:** Organizations should consider setting up an air gap a"
+          },
+          {
+            "chunk_ids": [
+              "nist-encryption.001"
+            ],
+            "section": "NIST SP 800-209"
+          }
+        ]
+      },
+      {
+        "case_id": "nist_encryption_limits",
+        "question": "nist_encryption_limits",
+        "passed": true,
+        "failures": [],
+        "retrieved_chunks": [
+          {
+            "chunk_ids": [
+              "nist-encryption.005"
+            ],
+            "section": "**EN-SS-R6 \u2013 At-rest encryption of sensitive data:** At-rest encryption protects against a variety o"
+          },
+          {
+            "chunk_ids": [
+              "nist-encryption.001"
+            ],
+            "section": "NIST SP 800-209"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.001"
+            ],
+            "section": "authentication. Note that the use of authentication does not provide encryption or integrity protect"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.003"
+            ],
+            "section": "NIST SP 800-209"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.004"
+            ],
+            "section": "NIST SP 800-209"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.002"
+            ],
+            "section": "### 4.7 Isolation"
+          },
+          {
+            "chunk_ids": [
+              "nist-recovery.007"
+            ],
+            "section": "**IS-SS-R8 \u2013 Consider setting up an air gap:** Organizations should consider setting up an air gap a"
+          }
         ]
       }
     ]
